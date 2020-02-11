@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display" rel="stylesheet"/>
+    <link href="css/tic-tac-toe.css" rel="stylesheet" type="text/css"/>
+    <script defer src="js/tic-tac-toe.js"></script>
+
+    <title>Tic | Tac | Toe</title>
+  </head>
+  <body>
+      <audio id="victory-audio">
+          <source src="audio/victory.mp3" type="audio/mpeg">
+      </audio>
+      <audio id="tie-audio">
+          <source src="audio/tie.mp3" type="audio/mpeg">
+      </audio>
+
+      <h1>Tic | Tac | Toe</h1>
+
+      <div class="audio-warning">This site has audio. Right click the tab and click "Mute site" if you would like to mute it.</div>
+
+      <h3>Who's going first?</h3>
+
+      <div id="change-order-button">X</div>
+
+      <table class="number-of-wins">
+          <tr>
+              <th># of X Wins</th>
+              <th># of O Wins</th>
+              <th># of Ties</th>
+          </tr>
+          <tr>
+              <td id="x-wins">0</td>
+              <td id="o-wins">0</td>
+              <td id="ties">0</td>
+          </tr>
+      </table>
+
+      <div id="reset-score-button">Reset Score</div>
+
+      <div class="container column">
+          <h2>Turn: X</h2>
+
+          <div class="container wrap" id="board">
+              <div class="square"></div>
+              <div class="square"></div>
+              <div class="square"></div>
+              <div class="square"></div>
+              <div class="square"></div>
+              <div class="square"></div>
+              <div class="square"></div>
+              <div class="square"></div>
+              <div class="square"></div>
+          </div>
+
+          <div id="reset-button">Play Again!</div>
+      </div>
+  </body>
+</html>
