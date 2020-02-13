@@ -16,3 +16,12 @@ h1 {
 div {
     text-align: center;
 }
+
+.brick-breaker-background {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 750px;
+    height: 500px;
+    background-image: url("../images/wood-texture.jpg");
+}
