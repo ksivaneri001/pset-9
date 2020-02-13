@@ -17,6 +17,25 @@ div {
     text-align: center;
 }
 
+.home-button {
+    margin-left: 20px;
+    margin-top: 20px;
+    background-image: url("../images/wood-texture.jpg");
+    background-size: cover;
+    height: 60px;
+    width: 60px;
+    border: 2px solid black;
+}
+
+.home-button:hover {
+    border-color: lightgray;
+}
+
+.home-button:active {
+    border-color: lightgray;
+    transform: scale(0.99);
+}
+
 #brick-breaker-game {
     display: block;
     margin-left: auto;
