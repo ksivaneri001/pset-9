@@ -6,7 +6,8 @@ const ctx = canvas.getContext("2d");
 // Variables
 let dx;
 let xy;
-let speed = 20;
+let dxFactor;
+let speed;
 let gameStarted = false;
 
 
@@ -45,9 +46,10 @@ function init() {
     ball.right = true;
     ball.up = true;
     paddle.x = (canvas.width / 2) - 40;
-    paddle.y = canvas.height - 10,
-    gameStarted = true;
+    paddle.y = canvas.height - 10;
+    dxFactor = 1;
     speed = 20;
+    gameStarted = true;
 }
 
 function game() {
@@ -72,10 +74,19 @@ function checkCollision() {
     if (ball.y - 10 >= canvas.height) {
         gameOver();
     }
-    if (ball.y + 10 == paddle.y && ball.x + 10 >= paddle.x && ball.x - 10 <= paddle.x + paddle.width) {
-        ball.up = true;
-        speed -= 0.5;
-        console.log(speed);
+    if (ball.y + 10 == paddle.y) {
+        if (ball.x + 10 >= paddle.x && ball.x - 10 <= paddle.x + paddle.width) {
+            ball.up = true;
+            speed -= 0.5;
+            dxFactor = 3;
+            console.log(speed);
+        }
+        else if (ball.x + 10 >= paddle.x + 20 && ball.x - 10 <= paddle.x + paddle.width - 20) {
+            ball.up = true;
+            speed -= 0.5;
+            dxFactor = 2.5;
+            console.log(speed);
+        }
     }
 
     if (paddle.x + paddle.width > canvas.width) {
@@ -93,16 +104,16 @@ function checkCollision() {
 
 function changeXAndY() {
     if (ball.right) {
-        dx = 5;
+        dx = 2 * dxFactor;
     }
     else {
-        dx = -5;
+        dx = -2 * dxFactor;
     }
     if (ball.up) {
-        dy = -5;
+        dy = -2;
     }
     else {
-        dy = 5;
+        dy = 2;
     }
     ball.x += dx;
     ball.y += dy;
