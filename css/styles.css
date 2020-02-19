@@ -38,9 +38,11 @@ div {
 
 #brick-breaker-game {
     display: block;
+    border: 2px solid black;
     margin-left: auto;
     margin-right: auto;
-    width: 750px;
-    height: 500px;
-    background-image: url("../images/wood-texture.jpg");
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* background-image: url("../images/wood-texture.jpg"); */
+    background-color: white;
 }
