@@ -22,9 +22,9 @@ let ball = {
 };
 
 let paddle = {
-    x: (canvas.width / 2) - 30,
+    x: (canvas.width / 2) - 40,
     y: canvas.height - 10,
-    width: 60,
+    width: 80,
     height: 5,
     movement: 15
 };
@@ -44,9 +44,10 @@ function init() {
     ball.y = canvas.height - 20;
     ball.right = true;
     ball.up = true;
-    paddle.x = (canvas.width / 2) - 30;
+    paddle.x = (canvas.width / 2) - 40;
     paddle.y = canvas.height - 10,
     gameStarted = true;
+    speed = 20;
 }
 
 function game() {
@@ -73,7 +74,8 @@ function checkCollision() {
     }
     if (ball.y + 10 == paddle.y && ball.x + 10 >= paddle.x && ball.x - 10 <= paddle.x + paddle.width) {
         ball.up = true;
-        speed -= 0.2;
+        speed -= 0.5;
+        console.log(speed);
     }
 
     if (paddle.x + paddle.width > canvas.width) {
