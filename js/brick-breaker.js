@@ -6,6 +6,7 @@ let x = 375;
 let y = 490;
 let right = true;
 let up = true;
+let speed = 15;
 
 window.onload = function() {
     game();
@@ -17,7 +18,7 @@ function game() {
 
     console.log("ksajfds");
 
-    setTimeout(game, 1);
+    setTimeout(game, speed);
 }
 
 function init() {
@@ -51,5 +52,5 @@ function draw() {
     ctx.stroke();
     setTimeout(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }, 1);
+    }, speed);
 }
