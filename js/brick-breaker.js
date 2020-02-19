@@ -26,7 +26,7 @@ let paddle = {
     y: canvas.height - 10,
     width: 60,
     height: 5,
-    movement: 10
+    movement: 15
 };
 
 
@@ -71,8 +71,9 @@ function checkCollision() {
     if (ball.y - 10 >= canvas.height) {
         gameOver();
     }
-    if (ball.y + 10 >= paddle.y && ball.x >= paddle.x && ball.x + 10 >= paddle.x && ball.x <= paddle.x + paddle.width) {
+    if (ball.y + 10 == paddle.y && ball.x + 10 >= paddle.x && ball.x - 10 <= paddle.x + paddle.width) {
         ball.up = true;
+        speed -= 0.2;
     }
 
     if (paddle.x + paddle.width > canvas.width) {
@@ -84,7 +85,7 @@ function checkCollision() {
         paddle.x = 0;
     }
     else {
-        paddle.movement = 10;
+        paddle.movement = 15;
     }
 }
 
