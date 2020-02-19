@@ -7,6 +7,7 @@ const ctx = canvas.getContext("2d");
 let dx;
 let xy;
 let speed = 20;
+let gameStarted = false;
 
 
 // Objects
@@ -24,7 +25,8 @@ let paddle = {
     x: (canvas.width / 2) - 30,
     y: canvas.height - 10,
     width: 60,
-    height: 5
+    height: 5,
+    movement: 10
 };
 
 
@@ -42,6 +44,9 @@ function init() {
     ball.y = canvas.height - 20;
     ball.right = true;
     ball.up = true;
+    paddle.x = (canvas.width / 2) - 30;
+    paddle.y = canvas.height - 10,
+    gameStarted = true;
 }
 
 function game() {
@@ -65,6 +70,21 @@ function checkCollision() {
     }
     if (ball.y - 10 >= canvas.height) {
         gameOver();
+    }
+    if (ball.y + 10 >= paddle.y && ball.x >= paddle.x && ball.x + 10 >= paddle.x && ball.x <= paddle.x + paddle.width) {
+        ball.up = true;
+    }
+
+    if (paddle.x + paddle.width > canvas.width) {
+        paddle.movement = 0;
+        paddle.x = canvas.width - paddle.width;
+    }
+    else if (paddle.x < 0) {
+        paddle.movement = 0;
+        paddle.x = 0;
+    }
+    else {
+        paddle.movement = 10;
     }
 }
 
@@ -94,11 +114,13 @@ function draw() {
 }
 
 function movePaddle(event) {
-    if (event.keyCode == 37) {
-        paddle.x -= 10;
-    }
-    else if (event.keyCode == 39) {
-        paddle.x += 10;
+    if (gameStarted) {
+        if (event.keyCode == 37) {
+            paddle.x -= paddle.movement;
+        }
+        else if (event.keyCode == 39) {
+            paddle.x += paddle.movement;
+        }
     }
 }
 
