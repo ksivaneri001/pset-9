@@ -17,7 +17,7 @@ function game() {
 
     console.log("ksajfds");
 
-    setTimeout(game, 100);
+    setTimeout(game, 1);
 }
 
 function init() {
@@ -30,16 +30,16 @@ function checkCollision() {
 
 function changeXAndY() {
     if (right) {
-        dx = 1;
+        dx = 5;
     }
     else {
-        dx = -1;
+        dx = -5;
     }
     if (up) {
-        dy = -1;
+        dy = -5;
     }
     else {
-        dy = 1;
+        dy = 5;
     }
     x += dx;
     y += dy;
@@ -49,4 +49,7 @@ function draw() {
     ctx.beginPath();
     ctx.arc(x, y, 10, 0, Math.PI * 2);
     ctx.stroke();
+    setTimeout(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }, 1);
 }
