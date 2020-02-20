@@ -50,6 +50,7 @@ function init() {
     dxFactor = 1;
     speed = 0;
     gameStarted = true;
+    createBottles();
 }
 
 function game() {
@@ -179,6 +180,10 @@ function draw() {
     ctx.beginPath();
     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
     ctx.stroke();
+
+    for (let i = 0; i < bottles.length; i++) {
+        ctx.strokeRect(bottles[i].x, bottles[i].y, bottles[i].width, bottles[i].height);
+    }
 }
 
 function getArrowKeys(event) {
@@ -196,6 +201,21 @@ function getArrowKeys(event) {
 
 function movePaddle(pixels) {
     paddle.x += pixels;
+}
+
+function createBottles() {
+    for (let y = 0; y <= 60; y += 30) {
+        for (let x = 0; x < canvas.width; x += canvas.width / 10) {
+            let bottleTemplate = {
+                x: x,
+                y: y,
+                width: canvas.width / 10,
+                height: 30
+            };
+
+            bottles.push(bottleTemplate);
+        }
+    }
 }
 
 function gameOver() {
