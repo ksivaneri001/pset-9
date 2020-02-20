@@ -36,7 +36,7 @@ window.onload = function() {
     document.getElementById("brick-breaker-game").onclick = init;
     game();
 }
-document.addEventListener("keydown", movePaddle);
+document.addEventListener("keydown", getArrowKeys);
 
 
 // Functions
@@ -181,15 +181,21 @@ function draw() {
     ctx.stroke();
 }
 
-function movePaddle(event) {
+function getArrowKeys(event) {
     if (gameStarted) {
         if (event.keyCode == 37) {
-            paddle.x -= paddle.movement;
+            movePaddle(-1 * paddle.movement);
+            // paddle.x -= paddle.movement;
         }
         else if (event.keyCode == 39) {
-            paddle.x += paddle.movement;
+            movePaddle(paddle.movement);
+            // paddle.x += paddle.movement;
         }
     }
+}
+
+function movePaddle(pixels) {
+    paddle.x += pixels;
 }
 
 function gameOver() {
