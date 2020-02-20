@@ -56,36 +56,66 @@ function game() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     draw();
     checkCollision();
-    changeXAndY();
+    changeDirection();
 
     setTimeout(game, speed);
 }
 
 function checkCollision() {
-    if (ball.x - 10 <= 0) {
+    if (ball.x - ball.radius <= 0) {
         ball.right = true;
     }
-    if (ball.x + 10 >= canvas.width) {
+    if (ball.x + ball.radius >= canvas.width) {
         ball.right = false;
     }
-    if (ball.y - 10 <= 0) {
+    if (ball.y - ball.radius <= 0) {
         ball.up = false;
     }
-    if (ball.y - 10 >= canvas.height) {
+    if (ball.y - ball.radius >= canvas.height) {
         gameOver();
     }
-    if (ball.y + 10 == paddle.y) {
-        if (ball.x + 10 >= paddle.x && ball.x - 10 <= paddle.x + paddle.width) {
+    if (ball.y + ball.radius == paddle.y) {
+        if (ball.x + ball.radius >= paddle.x && ball.x - ball.radius < paddle.x + 10) {
             ball.up = true;
+            ball.right = false;
             speed -= 0.5;
-            dxFactor = 3;
-            console.log(speed);
+            dxFactor = 2;
         }
-        else if (ball.x + 10 >= paddle.x + 20 && ball.x - 10 <= paddle.x + paddle.width - 20) {
+        else if (ball.x + ball.radius >= paddle.x + 10 && ball.x - ball.radius < paddle.x + 20) {
             ball.up = true;
+            ball.right = false;
             speed -= 0.5;
-            dxFactor = 2.5;
-            console.log(speed);
+            dxFactor = 1.5;
+        }
+        else if (ball.x + ball.radius >= paddle.x + 20 && ball.x - ball.radius < paddle.x + 30) {
+            ball.up = true;
+            ball.right = false;
+            speed -= 0.5;
+            dxFactor = 1;
+        }
+        else if (ball.x + ball.radius >= paddle.x + 30 && ball.x - ball.radius < paddle.x + 40) {
+            ball.up = true;
+            ball.right = false;
+            speed -= 0.5;
+            dxFactor = 0.5;
+        }
+        else if (ball.x + ball.radius >= paddle.x + 40 && ball.x - ball.radius < paddle.x + 50) {
+            ball.up = true;
+            ball.right = true;
+            speed -= 0.5;
+            dxFactor = 0.5;
+        }
+        else if (ball.x + ball.radius >= paddle.x + 50 && ball.x - ball.radius < paddle.x + 60) {
+            ball.up = true;
+            ball.right = true;
+            speed -= 0.5;
+            dxFactor = 1;
+        }
+        else if (ball.x + ball.radius >= paddle.x + 70 && ball.x - ball.radius <= paddle.x + paddle.width) {
+            ball.up = true;
+            ball.right = true;
+            speed -= 0.5;
+            dxFactor = 2;
         }
     }
 
@@ -102,18 +132,18 @@ function checkCollision() {
     }
 }
 
-function changeXAndY() {
+function changeDirection() {
     if (ball.right) {
-        dx = 2 * dxFactor;
+        dx = 3 * dxFactor;
     }
     else {
-        dx = -2 * dxFactor;
+        dx = -3 * dxFactor;
     }
     if (ball.up) {
-        dy = -2;
+        dy = -3;
     }
     else {
-        dy = 2;
+        dy = 3;
     }
     ball.x += dx;
     ball.y += dy;
