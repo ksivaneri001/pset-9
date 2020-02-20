@@ -48,7 +48,7 @@ function init() {
     paddle.x = (canvas.width / 2) - 40;
     paddle.y = canvas.height - 10;
     dxFactor = 1;
-    speed = 20;
+    speed = 0;
     gameStarted = true;
 }
 
@@ -58,7 +58,7 @@ function game() {
     checkCollision();
     changeDirection();
 
-    setTimeout(game, speed);
+    setTimeout(game, 20 - speed);
 }
 
 function checkCollision() {
@@ -75,48 +75,72 @@ function checkCollision() {
         gameOver();
     }
     if (ball.y + ball.radius == paddle.y) {
-        if (ball.x + ball.radius >= paddle.x && ball.x - ball.radius < paddle.x + 10) {
-            ball.up = true;
-            ball.right = false;
-            speed -= 0.5;
-            dxFactor = 2;
+        let a = 3;
+        const DX_FACTOR_CHANGE = a / 25;
+        for (let i = 2; i <= 100; i += 2) {
+            if (ball.x >= paddle.x - ball.radius + i - 2 && ball.x < paddle.x - ball.radius + i) {
+                if (i < 50) {
+                    ball.up = true;
+                    ball.right = false;
+                    speed++;
+                    dxFactor = Math.abs(a);
+                    console.log(dxFactor);
+                }
+                else if (i >= 50) {
+                    ball.up = true;
+                    ball.right = true;
+                    speed++;
+                    dxFactor = Math.abs(a);
+                    console.log(dxFactor);
+                }
+                break;
+            }
+            else {
+                a -= DX_FACTOR_CHANGE;
+            }
         }
-        else if (ball.x + ball.radius >= paddle.x + 10 && ball.x - ball.radius < paddle.x + 20) {
-            ball.up = true;
-            ball.right = false;
-            speed -= 0.5;
-            dxFactor = 1.5;
-        }
-        else if (ball.x + ball.radius >= paddle.x + 20 && ball.x - ball.radius < paddle.x + 30) {
-            ball.up = true;
-            ball.right = false;
-            speed -= 0.5;
-            dxFactor = 1;
-        }
-        else if (ball.x + ball.radius >= paddle.x + 30 && ball.x - ball.radius < paddle.x + 40) {
-            ball.up = true;
-            ball.right = false;
-            speed -= 0.5;
-            dxFactor = 0.5;
-        }
-        else if (ball.x + ball.radius >= paddle.x + 40 && ball.x - ball.radius < paddle.x + 50) {
-            ball.up = true;
-            ball.right = true;
-            speed -= 0.5;
-            dxFactor = 0.5;
-        }
-        else if (ball.x + ball.radius >= paddle.x + 50 && ball.x - ball.radius < paddle.x + 60) {
-            ball.up = true;
-            ball.right = true;
-            speed -= 0.5;
-            dxFactor = 1;
-        }
-        else if (ball.x + ball.radius >= paddle.x + 70 && ball.x - ball.radius <= paddle.x + paddle.width) {
-            ball.up = true;
-            ball.right = true;
-            speed -= 0.5;
-            dxFactor = 2;
-        }
+        // if (ball.x + ball.radius >= paddle.x && ball.x - ball.radius < paddle.x + 10) {
+        //     ball.up = true;
+        //     ball.right = false;
+        //     speed -= 0.5;
+        //     dxFactor = 2;
+        // }
+        // else if (ball.x + ball.radius >= paddle.x + 10 && ball.x - ball.radius < paddle.x + 20) {
+        //     ball.up = true;
+        //     ball.right = false;
+        //     speed -= 0.5;
+        //     dxFactor = 1.5;
+        // }
+        // else if (ball.x + ball.radius >= paddle.x + 20 && ball.x - ball.radius < paddle.x + 30) {
+        //     ball.up = true;
+        //     ball.right = false;
+        //     speed -= 0.5;
+        //     dxFactor = 1;
+        // }
+        // else if (ball.x + ball.radius >= paddle.x + 30 && ball.x - ball.radius < paddle.x + 40) {
+        //     ball.up = true;
+        //     ball.right = false;
+        //     speed -= 0.5;
+        //     dxFactor = 0.5;
+        // }
+        // else if (ball.x + ball.radius >= paddle.x + 40 && ball.x - ball.radius < paddle.x + 50) {
+        //     ball.up = true;
+        //     ball.right = true;
+        //     speed -= 0.5;
+        //     dxFactor = 0.5;
+        // }
+        // else if (ball.x + ball.radius >= paddle.x + 50 && ball.x - ball.radius < paddle.x + 60) {
+        //     ball.up = true;
+        //     ball.right = true;
+        //     speed -= 0.5;
+        //     dxFactor = 1;
+        // }
+        // else if (ball.x + ball.radius >= paddle.x + 70 && ball.x - ball.radius <= paddle.x + paddle.width) {
+        //     ball.up = true;
+        //     ball.right = true;
+        //     speed -= 0.5;
+        //     dxFactor = 2;
+        // }
     }
 
     if (paddle.x + paddle.width > canvas.width) {
