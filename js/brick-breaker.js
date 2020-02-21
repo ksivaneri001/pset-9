@@ -83,16 +83,16 @@ function checkCollision() {
                 if (i < 50) {
                     ball.up = true;
                     ball.right = false;
-                    speed++;
+                    speed = (speed >= 19) ? speed = 19 : speed + 1;
+                    console.log(speed);
                     dxFactor = Math.abs(a);
-                    console.log(dxFactor);
                 }
                 else if (i >= 50) {
                     ball.up = true;
                     ball.right = true;
-                    speed++;
+                    speed = (speed >= 19) ? speed = 19 : speed + 1;
+                    console.log(speed);
                     dxFactor = Math.abs(a);
-                    console.log(dxFactor);
                 }
                 break;
             }
