@@ -75,6 +75,13 @@ function checkCollision() {
     if (ball.y - ball.radius >= canvas.height) {
         gameOver();
     }
+
+    for (let j = 0; j < bottles.length; j++) {
+        if (ball.y - ball.radius <= bottles[j].y + bottles[j].height && ball.x >= bottles[j].x - ball.radius && ball.x < bottles[j].x + bottles[j].width + ball.radius) {
+            ball.up = false;
+        }
+    }
+
     if (ball.y + ball.radius == paddle.y) {
         let a = 3;
         const DX_FACTOR_CHANGE = a / 25;
