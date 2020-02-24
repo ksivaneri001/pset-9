@@ -49,8 +49,9 @@ function init() {
     paddle.y = canvas.height - 10;
     dxFactor = 1;
     speed = 0;
-    gameStarted = true;
+    bottles = [];
     createBottles();
+    gameStarted = true;
 }
 
 function game() {
@@ -79,6 +80,9 @@ function checkCollision() {
     for (let j = 0; j < bottles.length; j++) {
         if (ball.y - ball.radius <= bottles[j].y + bottles[j].height && ball.x >= bottles[j].x - ball.radius && ball.x < bottles[j].x + bottles[j].width + ball.radius) {
             ball.up = false;
+            ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
+            bottles.splice(j, 1);
+            break;
         }
     }
 
@@ -91,14 +95,12 @@ function checkCollision() {
                     ball.up = true;
                     ball.right = false;
                     speed = (speed >= 19) ? speed = 19 : speed + 1;
-                    console.log(speed);
                     dxFactor = Math.abs(a);
                 }
                 else if (i >= 50) {
                     ball.up = true;
                     ball.right = true;
                     speed = (speed >= 19) ? speed = 19 : speed + 1;
-                    console.log(speed);
                     dxFactor = Math.abs(a);
                 }
                 break;
@@ -219,12 +221,12 @@ function createBottles() {
                 width: canvas.width / 10,
                 height: 30
             };
-
             bottles.push(bottleTemplate);
         }
     }
 }
 
 function gameOver() {
+    console.log("alunxa is slightly respectable");
     init();
 }
