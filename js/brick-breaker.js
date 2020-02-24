@@ -1,11 +1,11 @@
 // Cached Element References
 const canvas = document.getElementById("brick-breaker-game");
 const ctx = canvas.getContext("2d");
+ctx.strokeStyle = "darkblue";
 
 
 // Variables
 let dx;
-let xy;
 let dxFactor;
 let speed;
 let gameStarted = false;
@@ -59,6 +59,9 @@ function game() {
     draw();
     checkCollision();
     changeDirection();
+    if (gameStarted && bottles.length === 0) {
+        win();
+    }
 
     setTimeout(game, 20 - speed);
 }
@@ -227,6 +230,10 @@ function createBottles() {
 }
 
 function gameOver() {
+    init();
+}
+
+function win() {
     console.log("alunxa is slightly respectable");
     init();
 }
