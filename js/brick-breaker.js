@@ -112,48 +112,6 @@ function checkCollision() {
                 a -= DX_FACTOR_CHANGE;
             }
         }
-        // if (ball.x + ball.radius >= paddle.x && ball.x - ball.radius < paddle.x + 10) {
-        //     ball.up = true;
-        //     ball.right = false;
-        //     speed -= 0.5;
-        //     dxFactor = 2;
-        // }
-        // else if (ball.x + ball.radius >= paddle.x + 10 && ball.x - ball.radius < paddle.x + 20) {
-        //     ball.up = true;
-        //     ball.right = false;
-        //     speed -= 0.5;
-        //     dxFactor = 1.5;
-        // }
-        // else if (ball.x + ball.radius >= paddle.x + 20 && ball.x - ball.radius < paddle.x + 30) {
-        //     ball.up = true;
-        //     ball.right = false;
-        //     speed -= 0.5;
-        //     dxFactor = 1;
-        // }
-        // else if (ball.x + ball.radius >= paddle.x + 30 && ball.x - ball.radius < paddle.x + 40) {
-        //     ball.up = true;
-        //     ball.right = false;
-        //     speed -= 0.5;
-        //     dxFactor = 0.5;
-        // }
-        // else if (ball.x + ball.radius >= paddle.x + 40 && ball.x - ball.radius < paddle.x + 50) {
-        //     ball.up = true;
-        //     ball.right = true;
-        //     speed -= 0.5;
-        //     dxFactor = 0.5;
-        // }
-        // else if (ball.x + ball.radius >= paddle.x + 50 && ball.x - ball.radius < paddle.x + 60) {
-        //     ball.up = true;
-        //     ball.right = true;
-        //     speed -= 0.5;
-        //     dxFactor = 1;
-        // }
-        // else if (ball.x + ball.radius >= paddle.x + 70 && ball.x - ball.radius <= paddle.x + paddle.width) {
-        //     ball.up = true;
-        //     ball.right = true;
-        //     speed -= 0.5;
-        //     dxFactor = 2;
-        // }
     }
 
     if (paddle.x + paddle.width > canvas.width) {
