@@ -27,7 +27,7 @@ let paddle = {
     y: canvas.height - 10,
     width: 80,
     height: 5,
-    movement: 15
+    movement: 20
 };
 
 
@@ -55,12 +55,14 @@ function init() {
 }
 
 function game() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    draw();
-    checkCollision();
-    changeDirection();
-    if (gameStarted && bottles.length === 0) {
-        win();
+    if (gameStarted) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        draw();
+        checkCollision();
+        changeDirection();
+        if (bottles.length === 0) {
+            win();
+        }
     }
 
     setTimeout(game, 20 - speed);
@@ -81,8 +83,20 @@ function checkCollision() {
     }
 
     for (let j = 0; j < bottles.length; j++) {
-        if (ball.y - ball.radius <= bottles[j].y + bottles[j].height && ball.x >= bottles[j].x - ball.radius && ball.x < bottles[j].x + bottles[j].width + ball.radius) {
+        if (ball.y - ball.radius <= bottles[j].y + bottles[j].height && ball.y - ball.radius > bottles[j].y + bottles[j].height - 5 && ball.x >= bottles[j].x - ball.radius && ball.x < bottles[j].x + bottles[j].width + ball.radius) {
             ball.up = false;
+            ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
+            bottles.splice(j, 1);
+            break;
+        }
+        else if (ball.x + ball.radius >= bottles[j].x && ball.x + ball.radius < bottles[j].x + 5 && ball.y >= bottles[j].y - ball.radius && ball.y < bottles[j].y + bottles[j].height + ball.radius) {
+            ball.right = false;
+            ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
+            bottles.splice(j, 1);
+            break;
+        }
+        else if (ball.x - ball.radius <= bottles[j].x + bottles[j].width && ball.x - ball.radius > bottles[j].x + bottles[j].width - 5 && ball.y >= bottles[j].y - ball.radius && ball.y < bottles[j].y + bottles[j].height + ball.radius) {
+            ball.right = true;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
             break;
@@ -123,7 +137,7 @@ function checkCollision() {
         paddle.x = 0;
     }
     else {
-        paddle.movement = 15;
+        paddle.movement = 20;
     }
 }
 
@@ -174,13 +188,13 @@ function movePaddle(pixels) {
 }
 
 function createBottles() {
-    for (let y = 0; y <= 60; y += 30) {
+    for (let y = 0; y <= 100; y += 50) {
         for (let x = 0; x < canvas.width; x += canvas.width / 10) {
             let bottleTemplate = {
                 x: x,
                 y: y,
                 width: canvas.width / 10,
-                height: 30
+                height: 50
             };
             bottles.push(bottleTemplate);
         }
