@@ -111,13 +111,13 @@ function checkCollision() {
                 if (i < 50) {
                     ball.up = true;
                     ball.right = false;
-                    speed = (speed >= 19) ? speed = 19 : speed + 1;
+                    speed = (speed >= 15) ? speed = 15 : speed + 0.5;
                     dxFactor = Math.abs(a);
                 }
                 else if (i >= 50) {
                     ball.up = true;
                     ball.right = true;
-                    speed = (speed >= 19) ? speed = 19 : speed + 1;
+                    speed = (speed >= 15) ? speed = 15 : speed + 0.5;
                     dxFactor = Math.abs(a);
                 }
                 break;
@@ -188,13 +188,13 @@ function movePaddle(pixels) {
 }
 
 function createBottles() {
-    for (let y = 0; y <= 100; y += 50) {
+    for (let y = 0; y <= 80; y += 40) {
         for (let x = 0; x < canvas.width; x += canvas.width / 10) {
             let bottleTemplate = {
                 x: x,
                 y: y,
                 width: canvas.width / 10,
-                height: 50
+                height: 40
             };
             bottles.push(bottleTemplate);
         }
