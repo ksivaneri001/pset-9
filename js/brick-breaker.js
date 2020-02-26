@@ -1,7 +1,11 @@
 // Cached Element References
 const canvas = document.getElementById("brick-breaker-game");
 const ctx = canvas.getContext("2d");
-ctx.strokeStyle = "darkblue";
+ctx.fillStyle = "orange";
+ctx.strokeStyle = "lightgray";
+ctx.lineWidth = 2.5;
+ctx.lineCap = "round";
+ctx.lineJoin = "round";
 
 
 // Variables
@@ -165,11 +169,11 @@ function changeDirection() {
 }
 
 function draw() {
-    ctx.strokeRect(paddle.x, paddle.y, paddle.width, paddle.height);
+    ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
 
     ctx.beginPath();
     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-    ctx.stroke();
+    ctx.fill();
 
     for (let i = 0; i < bottles.length; i++) {
         ctx.strokeRect(bottles[i].x, bottles[i].y, bottles[i].width, bottles[i].height);
