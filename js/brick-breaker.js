@@ -2,7 +2,7 @@
 const canvas = document.getElementById("brick-breaker-game");
 const ctx = canvas.getContext("2d");
 ctx.fillStyle = "orange";
-ctx.strokeStyle = "lightgray";
+ctx.strokeStyle = "black";
 ctx.lineWidth = 2.5;
 ctx.lineCap = "round";
 ctx.lineJoin = "round";
@@ -221,25 +221,21 @@ function gameOver() {
     gameStarted = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let gameOverStats = (bottles.length === 29) ? (30 - bottles.length) + " brick broken out of 30" : (30 - bottles.length) + " bricks broken out of 30";
-    ctx.font = "48px sans-serif";
-    ctx.strokeStyle = "black";
+    ctx.font = "48px Comic Sans MS";
     ctx.strokeText("GAME OVER", canvas.width / 2, (canvas.height / 2) - 40);
     ctx.fillText("GAME OVER", canvas.width / 2, (canvas.height / 2) - 40);
     ctx.strokeText(gameOverStats, canvas.width / 2, (canvas.height / 2) + 40);
     ctx.fillText(gameOverStats, canvas.width / 2, (canvas.height / 2) + 40);
-    ctx.strokeStyle = "lightgray";
     document.getElementById("brick-breaker-play").innerHTML = "Play Again";
 }
 
 function win() {
     gameStarted = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.font = "48px sans-serif";
-    ctx.strokeStyle = "black";
+    ctx.font = "48px Comic Sans MS";
     ctx.strokeText("CONGRATULATIONS!", canvas.width / 2, (canvas.height / 2) - 40);
     ctx.fillText("CONGRATULATIONS!", canvas.width / 2, (canvas.height / 2) - 40);
     ctx.strokeText("You are truly the master of juice!", canvas.width / 2, (canvas.height / 2) + 40);
     ctx.fillText("You are truly the master of juice!", canvas.width / 2, (canvas.height / 2) + 40);
-    ctx.strokeStyle = "lightgray";
     document.getElementById("brick-breaker-play").innerHTML = "Play Again";
 }
