@@ -7,6 +7,7 @@ ctx.lineWidth = 2.5;
 ctx.lineCap = "round";
 ctx.lineJoin = "round";
 ctx.textAlign = "center";
+ctx.font = "40px Comic Sans MS";
 
 
 // Variables
@@ -128,14 +129,14 @@ function checkCollision() {
                     ball.up = true;
                     ball.right = false;
                     ball.y = canvas.height - 20;
-                    speed = (speed >= 15) ? speed = 15 : speed + 0.5;
+                    speed = (speed >= 14) ? speed = 14 : speed + 0.5;
                     dxFactor = Math.abs(a);
                 }
                 else if (i >= 50) {
                     ball.up = true;
                     ball.right = true;
                     ball.y = canvas.height - 20;
-                    speed = (speed >= 15) ? speed = 15 : speed + 0.5;
+                    speed = (speed >= 14) ? speed = 14 : speed + 0.5;
                     dxFactor = Math.abs(a);
                 }
                 break;
@@ -184,6 +185,18 @@ function draw() {
     for (let i = 0; i < bottles.length; i++) {
         ctx.drawImage(bottleImage, bottles[i].x, bottles[i].y);
     }
+
+    ctx.font = "24px Comic Sans MS";
+    ctx.fillStyle = "lightgray";
+    ctx.textAlign = "left";
+    ctx.fillText("Bottles Left: " + bottles.length, 10, canvas.height - 20);
+
+    ctx.textAlign = "right";
+    ctx.fillText("Level: " + (Math.floor(speed) + 1), canvas.width - 10, canvas.height - 20);
+    ctx.font = "40px Comic Sans MS";
+
+    ctx.fillStyle = "orange";
+    ctx.textAlign = "center";
 }
 
 function getArrowKeys(event) {
@@ -206,6 +219,11 @@ function movePaddle(pixels) {
 function createBottles() {
     for (let y = 0; y <= 80; y += 40) {
         for (let x = 0; x < canvas.width; x += canvas.width / 10) {
+            let hasPowerUp = (Math.random() > 0.9) ? true : false;
+            if (hasPowerUp) {
+                let powerUpSelector = randomInteger(3);
+                
+            }
             let bottleTemplate = {
                 x: x,
                 y: y,
@@ -220,8 +238,7 @@ function createBottles() {
 function gameOver() {
     gameStarted = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    let gameOverStats = (bottles.length === 29) ? (30 - bottles.length) + " brick broken out of 30" : (30 - bottles.length) + " bricks broken out of 30";
-    ctx.font = "48px Comic Sans MS";
+    let gameOverStats = (bottles.length === 29) ? (30 - bottles.length) + " bottle broken out of 30" : (30 - bottles.length) + " bottles broken out of 30";
     ctx.strokeText("GAME OVER", canvas.width / 2, (canvas.height / 2) - 40);
     ctx.fillText("GAME OVER", canvas.width / 2, (canvas.height / 2) - 40);
     ctx.strokeText(gameOverStats, canvas.width / 2, (canvas.height / 2) + 40);
@@ -232,10 +249,13 @@ function gameOver() {
 function win() {
     gameStarted = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.font = "48px Comic Sans MS";
     ctx.strokeText("CONGRATULATIONS!", canvas.width / 2, (canvas.height / 2) - 40);
     ctx.fillText("CONGRATULATIONS!", canvas.width / 2, (canvas.height / 2) - 40);
     ctx.strokeText("You are truly the master of juice!", canvas.width / 2, (canvas.height / 2) + 40);
     ctx.fillText("You are truly the master of juice!", canvas.width / 2, (canvas.height / 2) + 40);
     document.getElementById("brick-breaker-play").innerHTML = "Play Again";
+}
+
+function randomInteger(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }
