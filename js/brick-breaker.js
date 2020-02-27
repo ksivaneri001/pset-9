@@ -226,8 +226,18 @@ function gameOver() {
     ctx.strokeText(gameOverStats, canvas.width / 2, (canvas.height / 2) + 40);
     ctx.fillText(gameOverStats, canvas.width / 2, (canvas.height / 2) + 40);
     ctx.strokeStyle = "lightgray";
+    document.getElementById("brick-breaker-play").innerHTML = "Play Again";
 }
 
 function win() {
-    init();
+    gameStarted = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = "48px sans-serif";
+    ctx.strokeStyle = "black";
+    ctx.strokeText("CONGRATULATIONS!", canvas.width / 2, (canvas.height / 2) - 40);
+    ctx.fillText("CONGRATULATIONS!", canvas.width / 2, (canvas.height / 2) - 40);
+    ctx.strokeText("You are truly the master of juice!", canvas.width / 2, (canvas.height / 2) + 40);
+    ctx.fillText("You are truly the master of juice!", canvas.width / 2, (canvas.height / 2) + 40);
+    ctx.strokeStyle = "lightgray";
+    document.getElementById("brick-breaker-play").innerHTML = "Play Again";
 }
