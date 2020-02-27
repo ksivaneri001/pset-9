@@ -6,6 +6,7 @@ ctx.strokeStyle = "lightgray";
 ctx.lineWidth = 2.5;
 ctx.lineCap = "round";
 ctx.lineJoin = "round";
+ctx.textAlign = "center";
 
 
 // Variables
@@ -217,6 +218,14 @@ function createBottles() {
 function gameOver() {
     gameStarted = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let gameOverStats = "Number of Bricks Broken: " + (30 - bottles.length);
+    ctx.font = "48px sans-serif";
+    ctx.strokeStyle = "black";
+    ctx.strokeText("GAME OVER", canvas.width / 2, (canvas.height / 2) - 40);
+    ctx.fillText("GAME OVER", canvas.width / 2, (canvas.height / 2) - 40);
+    ctx.strokeText(gameOverStats, canvas.width / 2, (canvas.height / 2) + 40);
+    ctx.fillText(gameOverStats, canvas.width / 2, (canvas.height / 2) + 40);
+    ctx.strokeStyle = "lightgray";
 }
 
 function win() {
