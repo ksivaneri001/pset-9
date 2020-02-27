@@ -32,7 +32,7 @@ let paddle = {
     y: canvas.height - 10,
     width: 80,
     height: 5,
-    movement: 20
+    movement: 1
 };
 
 let bottleImage = new Image();
@@ -156,7 +156,7 @@ function checkCollision() {
         paddle.x = 0;
     }
     else {
-        paddle.movement = 20;
+        paddle.movement = 1;
     }
 }
 
@@ -202,12 +202,12 @@ function draw() {
 function getArrowKeys(event) {
     if (gameStarted) {
         if (event.keyCode == 37) {
-            movePaddle(-1 * paddle.movement);
-            // paddle.x -= paddle.movement;
+            let timer = setInterval(() => paddle.x -= paddle.movement, 10);
+            setTimeout(() => { clearInterval(timer); }, 100);
         }
         else if (event.keyCode == 39) {
-            movePaddle(paddle.movement);
-            // paddle.x += paddle.movement;
+            let timer2 = setInterval(() => paddle.x += paddle.movement, 10);
+            setTimeout(() => { clearInterval(timer2); }, 100);
         }
     }
 }
@@ -219,11 +219,22 @@ function movePaddle(pixels) {
 function createBottles() {
     for (let y = 0; y <= 80; y += 40) {
         for (let x = 0; x < canvas.width; x += canvas.width / 10) {
-            let hasPowerUp = (Math.random() > 0.9) ? true : false;
-            if (hasPowerUp) {
-                let powerUpSelector = randomInteger(3);
-                
-            }
+            // let hasPowerUp = (Math.random() > 0.9) ? true : false;
+            // let powerUp;
+            // if (hasPowerUp) {
+            //     let powerUpSelector = randomInteger(3);
+            //     switch(powerUpSelector) {
+            //         case 0:
+            //             powerUp = "speed down";
+            //             break;
+            //         case 1:
+            //             powerUp = "large paddle";
+            //             break;
+            //         case 2:
+            //             powerUp = "uh";
+            //             break;
+            //     }
+            // }
             let bottleTemplate = {
                 x: x,
                 y: y,
