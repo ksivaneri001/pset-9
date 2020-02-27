@@ -202,11 +202,11 @@ function draw() {
 function getArrowKeys(event) {
     if (gameStarted) {
         if (event.keyCode == 37) {
-            let timer = setInterval(() => paddle.x -= paddle.movement, 10);
+            let timer = setInterval(() => paddle.x -= paddle.movement, 9);
             setTimeout(() => { clearInterval(timer); }, 100);
         }
         else if (event.keyCode == 39) {
-            let timer2 = setInterval(() => paddle.x += paddle.movement, 10);
+            let timer2 = setInterval(() => paddle.x += paddle.movement, 9);
             setTimeout(() => { clearInterval(timer2); }, 100);
         }
     }
