@@ -1,4 +1,4 @@
-// Cached Element References
+// Canvas
 const canvas = document.getElementById("brick-breaker-game");
 const ctx = canvas.getContext("2d");
 ctx.fillStyle = "orange";
@@ -14,7 +14,6 @@ let dx;
 let dxFactor;
 let speed;
 let gameStarted = false;
-
 
 // Objects
 let bottles = [];
@@ -35,6 +34,8 @@ let paddle = {
     movement: 20
 };
 
+let bottleImage = new Image();
+bottleImage.src = "images/juice_bottle.png";
 
 // Event Listeners
 window.onload = function() {
@@ -180,7 +181,7 @@ function draw() {
     ctx.fill();
 
     for (let i = 0; i < bottles.length; i++) {
-        ctx.strokeRect(bottles[i].x, bottles[i].y, bottles[i].width, bottles[i].height);
+        ctx.drawImage(bottleImage, bottles[i].x, bottles[i].y);
     }
 }
 
