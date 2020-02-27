@@ -37,6 +37,9 @@ let paddle = {
 let bottleImage = new Image();
 bottleImage.src = "images/juice_bottle.png";
 
+let orangeImage = new Image();
+orangeImage.src = "images/orange2.png";
+
 // Event Listeners
 window.onload = function() {
     document.getElementById("brick-breaker-play").onclick = init;
@@ -176,9 +179,7 @@ function changeDirection() {
 function draw() {
     ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
 
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.drawImage(orangeImage, ball.x - ball.radius, ball.y - ball.radius);
 
     for (let i = 0; i < bottles.length; i++) {
         ctx.drawImage(bottleImage, bottles[i].x, bottles[i].y);
@@ -219,7 +220,7 @@ function createBottles() {
 function gameOver() {
     gameStarted = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    let gameOverStats = "Number of Bricks Broken: " + (30 - bottles.length);
+    let gameOverStats = (bottles.length === 29) ? (30 - bottles.length) + " brick broken out of 30" : (30 - bottles.length) + " bricks broken out of 30";
     ctx.font = "48px sans-serif";
     ctx.strokeStyle = "black";
     ctx.strokeText("GAME OVER", canvas.width / 2, (canvas.height / 2) - 40);
