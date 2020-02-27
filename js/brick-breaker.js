@@ -87,25 +87,25 @@ function checkCollision() {
     }
 
     for (let j = 0; j < bottles.length; j++) {
-        if (ball.up && ball.y - ball.radius <= bottles[j].y + bottles[j].height && ball.y - ball.radius > bottles[j].y + bottles[j].height - 10 && ball.x >= bottles[j].x - ball.radius && ball.x < bottles[j].x + bottles[j].width + ball.radius) {
+        if (ball.up && ball.y - ball.radius <= bottles[j].y + bottles[j].height && ball.y - ball.radius > bottles[j].y + bottles[j].height - 12 && ball.x >= bottles[j].x - ball.radius && ball.x < bottles[j].x + bottles[j].width + ball.radius) {
             ball.up = false;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
             break;
         }
-        else if (!ball.up && ball.y + ball.radius >= bottles[j].y && ball.y + ball.radius < bottles[j].y + 10 && ball.x >= bottles[j].x - ball.radius && ball.x < bottles[j].x + bottles[j].width + ball.radius) {
+        else if (!ball.up && ball.y + ball.radius >= bottles[j].y && ball.y + ball.radius < bottles[j].y + 12 && ball.x >= bottles[j].x - ball.radius && ball.x < bottles[j].x + bottles[j].width + ball.radius) {
             ball.up = true;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
             break;
         }
-        else if (ball.right && ball.x + ball.radius >= bottles[j].x && ball.x + ball.radius < bottles[j].x + 10 && ball.y >= bottles[j].y - ball.radius && ball.y < bottles[j].y + bottles[j].height + ball.radius) {
+        else if (ball.right && ball.x + ball.radius >= bottles[j].x && ball.x + ball.radius < bottles[j].x + 12 && ball.y >= bottles[j].y - ball.radius && ball.y < bottles[j].y + bottles[j].height + ball.radius) {
             ball.right = false;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
             break;
         }
-        else if (!ball.right && ball.x - ball.radius <= bottles[j].x + bottles[j].width && ball.x - ball.radius > bottles[j].x + bottles[j].width - 10 && ball.y >= bottles[j].y - ball.radius && ball.y < bottles[j].y + bottles[j].height + ball.radius) {
+        else if (!ball.right && ball.x - ball.radius <= bottles[j].x + bottles[j].width && ball.x - ball.radius > bottles[j].x + bottles[j].width - 12 && ball.y >= bottles[j].y - ball.radius && ball.y < bottles[j].y + bottles[j].height + ball.radius) {
             ball.right = true;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
