@@ -44,6 +44,7 @@ th, td {
 
 .home-button:hover {
     border-color: lightgray;
+    cursor: pointer;
 }
 
 .home-button:active {

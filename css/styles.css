@@ -29,6 +29,7 @@ div {
 
 .home-button:hover {
     border-color: lightgray;
+    cursor: pointer;
 }
 
 .home-button:active {
@@ -45,4 +46,27 @@ div {
     margin-bottom: 20px;
     background-image: url("../images/wood-texture.jpg");
     background-color: white;
+}
+
+#brick-breaker-play {
+    display: block;
+    border: 3px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: auto;
+    width: 20%;
+    background-image: url("../images/wood-texture.jpg");
+    color: white;
+    font-size: 20px;
+}
+
+#brick-breaker-play:hover {
+    border-color: lightgray;
+    cursor: pointer;
+}
+
+#brick-breaker-play:active {
+    transform: scale(0.99);
 }

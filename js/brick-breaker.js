@@ -37,7 +37,7 @@ let paddle = {
 
 // Event Listeners
 window.onload = function() {
-    document.getElementById("brick-breaker-game").onclick = init;
+    document.getElementById("brick-breaker-play").onclick = init;
     game();
 }
 document.addEventListener("keydown", getArrowKeys);
@@ -45,8 +45,9 @@ document.addEventListener("keydown", getArrowKeys);
 
 // Functions
 function init() {
+    document.getElementById("brick-breaker-play").innerHTML = "Reset";
     ball.x = canvas.width / 2;
-    ball.y = canvas.height - 20;
+    ball.y = canvas.height - 30;
     ball.right = true;
     ball.up = true;
     paddle.x = (canvas.width / 2) - 40;
@@ -113,7 +114,7 @@ function checkCollision() {
         }
     }
 
-    if (ball.y + ball.radius == paddle.y) {
+    if (ball.y + ball.radius >= paddle.y && ball.y <= paddle.y + paddle.height) {
         let a = 3;
         const DX_FACTOR_CHANGE = a / 25;
         for (let i = 2; i <= 100; i += 2) {
@@ -121,12 +122,14 @@ function checkCollision() {
                 if (i < 50) {
                     ball.up = true;
                     ball.right = false;
+                    ball.y = canvas.height - 20;
                     speed = (speed >= 15) ? speed = 15 : speed + 0.5;
                     dxFactor = Math.abs(a);
                 }
                 else if (i >= 50) {
                     ball.up = true;
                     ball.right = true;
+                    ball.y = canvas.height - 20;
                     speed = (speed >= 15) ? speed = 15 : speed + 0.5;
                     dxFactor = Math.abs(a);
                 }
@@ -212,10 +215,10 @@ function createBottles() {
 }
 
 function gameOver() {
-    init();
+    gameStarted = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function win() {
-    console.log("alunxa is slightly respectable");
     init();
 }
