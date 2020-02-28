@@ -41,6 +41,11 @@ bottleImage.src = "images/juice_bottle.png";
 let orangeImage = new Image();
 orangeImage.src = "images/orange2.png";
 
+const victoryAudio = document.getElementById("victory-audio");
+const gameOverAudio = document.getElementById("game-over-audio");
+const glassBreakAudio = document.getElementById("glass-break-audio");
+
+
 // Event Listeners
 window.onload = function() {
     document.getElementById("brick-breaker-play").onclick = init;
@@ -52,6 +57,8 @@ document.addEventListener("keydown", getArrowKeys);
 // Functions
 function init() {
     document.getElementById("brick-breaker-play").innerHTML = "Reset";
+    victoryAudio.pause();
+    victoryAudio.currentTime = 0;
     ball.x = canvas.width / 2;
     ball.y = canvas.height - 30;
     ball.right = true;
@@ -98,24 +105,28 @@ function checkCollision() {
             ball.up = false;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
+            glassBreakAudio.play();
             break;
         }
         else if (!ball.up && ball.y + ball.radius >= bottles[j].y && ball.y + ball.radius < bottles[j].y + 12 && ball.x >= bottles[j].x - ball.radius && ball.x < bottles[j].x + bottles[j].width + ball.radius) {
             ball.up = true;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
+            glassBreakAudio.play();
             break;
         }
         else if (ball.right && ball.x + ball.radius >= bottles[j].x && ball.x + ball.radius < bottles[j].x + 12 && ball.y >= bottles[j].y - ball.radius && ball.y < bottles[j].y + bottles[j].height + ball.radius) {
             ball.right = false;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
+            glassBreakAudio.play();
             break;
         }
         else if (!ball.right && ball.x - ball.radius <= bottles[j].x + bottles[j].width && ball.x - ball.radius > bottles[j].x + bottles[j].width - 12 && ball.y >= bottles[j].y - ball.radius && ball.y < bottles[j].y + bottles[j].height + ball.radius) {
             ball.right = true;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
+            glassBreakAudio.play();
             break;
         }
     }
@@ -192,7 +203,7 @@ function draw() {
     ctx.fillText("Bottles Left: " + bottles.length, 10, canvas.height - 20);
 
     ctx.textAlign = "right";
-    ctx.fillText("Level: " + (Math.floor(speed) + 1), canvas.width - 10, canvas.height - 20);
+    ctx.fillText("Speed: " + (Math.floor(speed) + 1), canvas.width - 10, canvas.height - 20);
     ctx.font = "40px Comic Sans MS";
 
     ctx.fillStyle = "orange";
@@ -202,11 +213,11 @@ function draw() {
 function getArrowKeys(event) {
     if (gameStarted) {
         if (event.keyCode == 37) {
-            let timer = setInterval(() => paddle.x -= paddle.movement, 9);
+            let timer = setInterval(() => paddle.x -= paddle.movement, 6);
             setTimeout(() => { clearInterval(timer); }, 100);
         }
         else if (event.keyCode == 39) {
-            let timer2 = setInterval(() => paddle.x += paddle.movement, 9);
+            let timer2 = setInterval(() => paddle.x += paddle.movement, 6);
             setTimeout(() => { clearInterval(timer2); }, 100);
         }
     }
@@ -247,6 +258,7 @@ function createBottles() {
 }
 
 function gameOver() {
+    gameOverAudio.play();
     gameStarted = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let gameOverStats = (bottles.length === 29) ? (30 - bottles.length) + " bottle broken out of 30" : (30 - bottles.length) + " bottles broken out of 30";
@@ -258,6 +270,7 @@ function gameOver() {
 }
 
 function win() {
+    victoryAudio.play();
     gameStarted = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.strokeText("CONGRATULATIONS!", canvas.width / 2, (canvas.height / 2) - 40);
