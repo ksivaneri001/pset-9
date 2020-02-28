@@ -70,3 +70,25 @@ div {
 #brick-breaker-play:active {
     transform: scale(0.99);
 }
+
+table {
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+td {
+    border: 2px solid black;
+    height: 60px;
+    width: 60px;
+}
+
+.dark-square {
+    background-image: url("../images/wood-texture.jpg");
+    background-size: cover;
+}
+
+.light-square {
+    background-image: url("../images/light-wood-texture.jpg");
+}
