@@ -213,18 +213,14 @@ function draw() {
 function getArrowKeys(event) {
     if (gameStarted) {
         if (event.keyCode == 37) {
-            let timer = setInterval(() => paddle.x -= paddle.movement, 6);
+            let timer = setInterval(() => paddle.x -= paddle.movement, 4);
             setTimeout(() => { clearInterval(timer); }, 100);
         }
         else if (event.keyCode == 39) {
-            let timer2 = setInterval(() => paddle.x += paddle.movement, 6);
+            let timer2 = setInterval(() => paddle.x += paddle.movement, 4);
             setTimeout(() => { clearInterval(timer2); }, 100);
         }
     }
-}
-
-function movePaddle(pixels) {
-    paddle.x += pixels;
 }
 
 function createBottles() {
