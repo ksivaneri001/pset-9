@@ -52,6 +52,7 @@ window.onload = function() {
     game();
 }
 document.addEventListener("keydown", getArrowKeys);
+document.getElementById("brick-breaker-game").addEventListener("mousemove", getMouse);
 
 
 // Functions
@@ -221,6 +222,10 @@ function getArrowKeys(event) {
             setTimeout(() => { clearInterval(timer2); }, 100);
         }
     }
+}
+
+function getMouse(event2) {
+    paddle.x = event2.offsetX - (paddle.width / 2);
 }
 
 function createBottles() {
