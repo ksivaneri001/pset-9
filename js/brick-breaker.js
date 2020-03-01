@@ -149,14 +149,14 @@ function checkCollision() {
                     ball.up = true;
                     ball.right = false;
                     ball.y = canvas.height - 20;
-                    speed = (speed >= 19) ? speed = 19 : speed + 1;
+                    speed = (speed >= 14) ? speed = 14 : speed + 0.5;
                     dxFactor = Math.abs(a);
                 }
                 else if (i >= 50) {
                     ball.up = true;
                     ball.right = true;
                     ball.y = canvas.height - 20;
-                    speed = (speed >= 19) ? speed = 19 : speed + 1;
+                    speed = (speed >= 14) ? speed = 14 : speed + 0.5;
                     dxFactor = Math.abs(a);
                 }
                 break;
@@ -212,7 +212,7 @@ function draw() {
     ctx.fillText("Bottles Left: " + bottles.length, 10, canvas.height - 20);
 
     ctx.textAlign = "right";
-    ctx.fillText("Speed: " + (speed + 1), canvas.width - 10, canvas.height - 20);
+    ctx.fillText("Speed: " + (Math.floor(speed) + 1), canvas.width - 10, canvas.height - 20);
     ctx.font = "40px Comic Sans MS";
 
     ctx.fillStyle = "orange";
