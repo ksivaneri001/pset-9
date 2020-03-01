@@ -39,6 +39,11 @@ div {
     transform: scale(0.99);
 }
 
+.brick-breaker-controls {
+    text-align: center;
+    font-size: 20px;
+}
+
 #brick-breaker-game {
     display: block;
     border: 2px solid black;

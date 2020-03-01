@@ -106,6 +106,8 @@ function checkCollision() {
             ball.up = false;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
+            glassBreakAudio.pause();
+            glassBreakAudio.currentTime = 0;
             glassBreakAudio.play();
             break;
         }
@@ -113,6 +115,8 @@ function checkCollision() {
             ball.up = true;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
+            glassBreakAudio.pause();
+            glassBreakAudio.currentTime = 0;
             glassBreakAudio.play();
             break;
         }
@@ -120,6 +124,8 @@ function checkCollision() {
             ball.right = false;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
+            glassBreakAudio.pause();
+            glassBreakAudio.currentTime = 0;
             glassBreakAudio.play();
             break;
         }
@@ -127,6 +133,8 @@ function checkCollision() {
             ball.right = true;
             ctx.clearRect(bottles[j].x, bottles[j].y, bottles[j].width, bottles[j].height);
             bottles.splice(j, 1);
+            glassBreakAudio.pause();
+            glassBreakAudio.currentTime = 0;
             glassBreakAudio.play();
             break;
         }
@@ -141,14 +149,14 @@ function checkCollision() {
                     ball.up = true;
                     ball.right = false;
                     ball.y = canvas.height - 20;
-                    speed = (speed >= 14) ? speed = 14 : speed + 0.5;
+                    speed = (speed >= 19) ? speed = 19 : speed + 1;
                     dxFactor = Math.abs(a);
                 }
                 else if (i >= 50) {
                     ball.up = true;
                     ball.right = true;
                     ball.y = canvas.height - 20;
-                    speed = (speed >= 14) ? speed = 14 : speed + 0.5;
+                    speed = (speed >= 19) ? speed = 19 : speed + 1;
                     dxFactor = Math.abs(a);
                 }
                 break;
@@ -204,7 +212,7 @@ function draw() {
     ctx.fillText("Bottles Left: " + bottles.length, 10, canvas.height - 20);
 
     ctx.textAlign = "right";
-    ctx.fillText("Speed: " + (Math.floor(speed) + 1), canvas.width - 10, canvas.height - 20);
+    ctx.fillText("Speed: " + (speed + 1), canvas.width - 10, canvas.height - 20);
     ctx.font = "40px Comic Sans MS";
 
     ctx.fillStyle = "orange";
