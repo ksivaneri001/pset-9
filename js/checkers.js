@@ -1,18 +1,39 @@
-let board = [];
+let board;
 let darkSquares = document.getElementsByClassName("dark-square");
 
 function createBoard() {
     board = [];
 
-    for (let i = 0; i < 32; i++) {
-        board.push("");
+    for (let j = 0; j < 64; j++) {
+        board.push(null);
     }
 
-    let j = 0;
+    let k = 0;
+    let oddRow = true;
 
-    for (let k = 0; k < darkSquares.length; k++) {
-        board.splice(j, 0, darkSquares[k]);
-        j += 2;
+    for (let l = 0; l < 64; l++) {
+        if (l !== 0 && l % 8 === 0) {
+            oddRow = !oddRow;
+            k = (!oddRow) ? k - 1 : k + 1;
+        }
+        if (oddRow) {
+            if (l % 2 !== 0) {
+                board[l] = "";
+            }
+            else if (l % 2 === 0) {
+                board[l] = darkSquares[k];
+                k++;
+            }
+        }
+        else {
+            if (l % 2 !== 0) {
+                board[l] = darkSquares[k];
+            }
+            else if (l % 2 === 0) {
+                board[l] = "";
+                k++;
+            }
+        }
     }
 }
 
