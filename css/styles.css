@@ -100,3 +100,14 @@ td {
 .light-square {
     background-image: url("../images/light-wood-texture.jpg");
 }
+
+.orange, .apple {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.orange:hover, .apple:hover {
+    background-color: green;
+    cursor: pointer;
+}

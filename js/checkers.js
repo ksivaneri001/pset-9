@@ -49,8 +49,8 @@ function createBoard() {
             };
             newOrangePiece.htmlImage = document.createElement("img");
             newOrangePiece.htmlImage.src = "images/orange.png";
-            newOrangePiece.htmlImage.height = "60";
-            newOrangePiece.htmlImage.width = "60";
+            newOrangePiece.htmlImage.height = "50";
+            newOrangePiece.htmlImage.width = "50";
             newOrangePiece.htmlImage.setAttribute("class", "orange");
             board[orange].append(newOrangePiece.htmlImage);
 
@@ -66,8 +66,8 @@ function createBoard() {
             };
             newApplePiece.htmlImage = document.createElement("img");
             newApplePiece.htmlImage.src = "images/apple.png";
-            newApplePiece.htmlImage.height = "60";
-            newApplePiece.htmlImage.width = "60";
+            newApplePiece.htmlImage.height = "50";
+            newApplePiece.htmlImage.width = "50";
             newApplePiece.htmlImage.setAttribute("class", "apple");
             board[apple].append(newApplePiece.htmlImage);
 
