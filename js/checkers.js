@@ -2,6 +2,7 @@ let board;
 let oranges;
 let apples;
 let darkSquares = document.getElementsByClassName("dark-square");
+let turn = "orange";
 
 function createBoard() {
     board = [];
@@ -84,23 +85,57 @@ window.onload = function() {
 
 function selectPiece() {
     for (let i = 0; i < oranges.length; i++) {
-        let a = document.getElementsByClassName("orange");
-        a[i].onclick = function() {
-            console.log("1");
+        oranges[i].htmlImage.onclick = function() {
+            moveOrange(i);
         };
     }
     for (let j = 0; j < apples.length; j++) {
-        let b = document.getElementsByClassName("apple");
-        b[j].onclick = function() {
-            console.log("2");
+        apples[j].htmlImage.onclick = function() {
+            moveApple(j);
         };
     }
 }
 
 function moveOrange(index) {
+    for (let i = 0; i < oranges.length; i++) {
+        oranges[i].htmlImage.style.backgroundColor = "transparent";
+    }
+    oranges[index].htmlImage.style.backgroundColor = "green";
 
+    if (oranges[index].king) {
+
+    }
+    else {
+        for (let j = 0; j < board.length; j++) {
+            board[j].onclick = undefined;
+        }
+
+        board[oranges[index].index - 7].onclick = function() {
+            console.log("joe mama");
+            board[oranges[index].index - 7].onclick = undefined;
+            board[oranges[index].index - 9].onclick = undefined;
+            oranges[index].htmlImage.style.backgroundColor = "transparent";
+        }
+
+        board[oranges[index].index - 9].onclick = function() {
+            console.log("joe mama");
+            board[oranges[index].index - 7].onclick = undefined;
+            board[oranges[index].index - 9].onclick = undefined;
+            oranges[index].htmlImage.style.backgroundColor = "transparent";
+        }
+    }
 }
 
-function moveApple (index) {
+function moveApple (index2) {
+    if (apples[index2].king) {
 
+    }
+    else {
+
+    }
+}
+
+let test = function() {
+    console.log("ALUHNNNNNXAAAA");
+    test = undefined;
 }

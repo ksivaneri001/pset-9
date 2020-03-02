@@ -108,6 +108,5 @@ td {
 }
 
 .orange:hover, .apple:hover {
-    background-color: green;
     cursor: pointer;
 }
