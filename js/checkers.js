@@ -40,10 +40,10 @@ function createBoard() {
         }
     }
 
-    for (let orange = 0; orange < 24; orange++) {
-        if (board[orange] !== "") {
+    for (let o = 63; o >= 40; o--) {
+        if (board[o] !== "") {
             let newOrangePiece = {
-                index: orange,
+                index: o,
                 htmlImage: null,
                 king: false
             };
@@ -52,15 +52,15 @@ function createBoard() {
             newOrangePiece.htmlImage.height = "50";
             newOrangePiece.htmlImage.width = "50";
             newOrangePiece.htmlImage.setAttribute("class", "orange");
-            board[orange].append(newOrangePiece.htmlImage);
+            board[o].append(newOrangePiece.htmlImage);
 
             oranges.push(newOrangePiece);
         }
     }
-    for (let apple = 63; apple >= 40; apple--) {
-        if (board[apple] !== "") {
+    for (let a = 0; a < 24; a++) {
+        if (board[a] !== "") {
             let newApplePiece = {
-                index: apple,
+                index: a,
                 htmlImage: null,
                 king: false
             };
@@ -69,7 +69,7 @@ function createBoard() {
             newApplePiece.htmlImage.height = "50";
             newApplePiece.htmlImage.width = "50";
             newApplePiece.htmlImage.setAttribute("class", "apple");
-            board[apple].append(newApplePiece.htmlImage);
+            board[a].append(newApplePiece.htmlImage);
 
             apples.push(newApplePiece);
         }
@@ -79,13 +79,28 @@ function createBoard() {
 window.onload = function() {
     createBoard();
 
-    document.getElementById("board").onclick = movePiece;
+    document.getElementById("board").onmouseover = selectPiece;
 };
 
-function movePiece() {
-    for (let i = 0; i < darkSquares.length; i++) {
-        darkSquares[i].onclick = function() {
-
-        }
+function selectPiece() {
+    for (let i = 0; i < oranges.length; i++) {
+        let a = document.getElementsByClassName("orange");
+        a[i].onclick = function() {
+            console.log("1");
+        };
     }
+    for (let j = 0; j < apples.length; j++) {
+        let b = document.getElementsByClassName("apple");
+        b[j].onclick = function() {
+            console.log("2");
+        };
+    }
+}
+
+function moveOrange(index) {
+
+}
+
+function moveApple (index) {
+
 }
