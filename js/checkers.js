@@ -100,27 +100,58 @@ function moveOrange(index) {
     for (let i = 0; i < oranges.length; i++) {
         oranges[i].htmlImage.style.backgroundColor = "transparent";
     }
+    for (let i = 0; i < darkSquares.length; i++) {
+        darkSquares[i].style.backgroundImage = "url(images/wood-texture.jpg)";
+    }
     oranges[index].htmlImage.style.backgroundColor = "green";
 
     if (oranges[index].king) {
 
     }
     else {
+        console.log(oranges[index]);
+
+        if (board[oranges[index].index - 7] !== "") {
+            board[oranges[index].index - 7].style.backgroundImage = "url(images/red-wood-texture.jpg)";
+        }
+        if (board[oranges[index].index - 9] !== "") {
+            board[oranges[index].index - 9].style.backgroundImage = "url(images/red-wood-texture.jpg)";
+        }
+
         for (let j = 0; j < board.length; j++) {
             board[j].onclick = undefined;
         }
 
         board[oranges[index].index - 7].onclick = function() {
-            console.log("joe mama");
+            console.log("right");
+
             board[oranges[index].index - 7].onclick = undefined;
             board[oranges[index].index - 9].onclick = undefined;
+
+            if (board[oranges[index].index - 7] !== "") {
+                board[oranges[index].index - 7].style.backgroundImage = "url(images/wood-texture.jpg)";
+            }
+            if (board[oranges[index].index - 9] !== "") {
+                board[oranges[index].index - 9].style.backgroundImage = "url(images/wood-texture.jpg)";
+            }
+
+
             oranges[index].htmlImage.style.backgroundColor = "transparent";
         }
 
         board[oranges[index].index - 9].onclick = function() {
-            console.log("joe mama");
+            console.log("left");
+
             board[oranges[index].index - 7].onclick = undefined;
             board[oranges[index].index - 9].onclick = undefined;
+
+            if (board[oranges[index].index - 7] !== "") {
+                board[oranges[index].index - 7].style.backgroundImage = "url(images/wood-texture.jpg)";
+            }
+            if (board[oranges[index].index - 9] !== "") {
+                board[oranges[index].index - 9].style.backgroundImage = "url(images/wood-texture.jpg)";
+            }
+
             oranges[index].htmlImage.style.backgroundColor = "transparent";
         }
     }
@@ -133,9 +164,4 @@ function moveApple (index2) {
     else {
 
     }
-}
-
-let test = function() {
-    console.log("ALUHNNNNNXAAAA");
-    test = undefined;
 }
