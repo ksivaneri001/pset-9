@@ -117,7 +117,8 @@ function moveOrange(index) {
 
         let canRight = true;
         let canLeft = true;
-        let spaceMultiple = 1;
+        let leftMultiple = 1;
+        let rightMultiple = 1;
         for (let i = 0; i < oranges.length; i++) {
             if (oranges[i].index === oranges[index].index - 7) {
                 canRight = false;
@@ -128,18 +129,32 @@ function moveOrange(index) {
         }
         for (let i = 0; i < apples.length; i++) {
             if (apples[i].index === oranges[index].index - 7) {
-                canRight = false;
+                for (let j = 0; j < apples.length; j++) {
+                    if (apples[j].index === oranges[index].index - 14 || oranges[j].index === oranges[index].index - 14) {
+                        canRight = false;
+                    }
+                    else {
+                        rightMultiple = 2;
+                    }
+                }
             }
             if (apples[i].index === oranges[index].index - 9) {
-                canLeft = false;
+                for (let j = 0; j < apples.length; j++) {
+                    if (apples[j].index === oranges[index].index - 18 || oranges[j].index === oranges[index].index - 18) {
+                        canLeft = false;
+                    }
+                    else {
+                        leftMultiple = 2;
+                    }
+                }
             }
         }
 
-        if (board[oranges[index].index - 7] !== "" && canRight) {
-            board[oranges[index].index - 7].style.backgroundImage = "url(images/red-wood-texture.jpg)";
+        if (board[oranges[index].index - (7 * rightMultiple)] !== "" && canRight) {
+            board[oranges[index].index - (7 * rightMultiple)].style.backgroundImage = "url(images/red-wood-texture.jpg)";
         }
-        if (board[oranges[index].index - 9] !== "" && canLeft) {
-            board[oranges[index].index - 9].style.backgroundImage = "url(images/red-wood-texture.jpg)";
+        if (board[oranges[index].index - (9 * leftMultiple)] !== "" && canLeft) {
+            board[oranges[index].index - (9 * leftMultiple)].style.backgroundImage = "url(images/red-wood-texture.jpg)";
         }
 
         for (let i = 0; i < board.length; i++) {
@@ -147,47 +162,47 @@ function moveOrange(index) {
         }
 
         if (canRight) {
-            board[oranges[index].index - 7].onclick = function() {
+            board[oranges[index].index - (7 * rightMultiple)].onclick = function() {
                 console.log("right");
 
-                board[oranges[index].index - 7].onclick = undefined;
-                board[oranges[index].index - 9].onclick = undefined;
+                board[oranges[index].index - (7 * rightMultiple)].onclick = undefined;
+                board[oranges[index].index - (9 * leftMultiple)].onclick = undefined;
 
-                if (board[oranges[index].index - 7] !== "") {
-                    board[oranges[index].index - 7].style.backgroundImage = "url(images/wood-texture.jpg)";
+                if (board[oranges[index].index - (7 * rightMultiple)] !== "") {
+                    board[oranges[index].index - (7 * rightMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
-                if (board[oranges[index].index - 9] !== "") {
-                    board[oranges[index].index - 9].style.backgroundImage = "url(images/wood-texture.jpg)";
+                if (board[oranges[index].index - (9 * leftMultiple)] !== "") {
+                    board[oranges[index].index - (9 * leftMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
                 oranges[index].htmlImage.style.backgroundColor = "transparent";
 
-                board[oranges[index].index - 7].append(oranges[index].htmlImage);
-                oranges[index].index -= 7;
+                board[oranges[index].index - (7 * rightMultiple)].append(oranges[index].htmlImage);
+                oranges[index].index -= (7 * rightMultiple);
 
-                turn = "Apple";
+                turn = (rightMultiple === 2) ? "Orange" : "Apple";
                 document.getElementById("turn").innerHTML = turn;
             }
         }
 
         if (canLeft) {
-            board[oranges[index].index - 9].onclick = function() {
+            board[oranges[index].index - (9 * leftMultiple)].onclick = function() {
                 console.log("left");
 
-                board[oranges[index].index - 7].onclick = undefined;
-                board[oranges[index].index - 9].onclick = undefined;
+                board[oranges[index].index - (7 * rightMultiple)].onclick = undefined;
+                board[oranges[index].index - (9 * leftMultiple)].onclick = undefined;
 
-                if (board[oranges[index].index - 7] !== "") {
-                    board[oranges[index].index - 7].style.backgroundImage = "url(images/wood-texture.jpg)";
+                if (board[oranges[index].index - (7 * rightMultiple)] !== "") {
+                    board[oranges[index].index - (7 * rightMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
-                if (board[oranges[index].index - 9] !== "") {
-                    board[oranges[index].index - 9].style.backgroundImage = "url(images/wood-texture.jpg)";
+                if (board[oranges[index].index - (9 * leftMultiple)] !== "") {
+                    board[oranges[index].index - (9 * leftMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
                 oranges[index].htmlImage.style.backgroundColor = "transparent";
 
-                board[oranges[index].index - 9].append(oranges[index].htmlImage);
-                oranges[index].index -= 9;
+                board[oranges[index].index - (9 * leftMultiple)].append(oranges[index].htmlImage);
+                oranges[index].index -= (9 * leftMultiple);
 
-                turn = "Apple";
+                turn = (leftMultiple === 2) ? "Orange" : "Apple";
                 document.getElementById("turn").innerHTML = turn;
             }
         }
@@ -211,12 +226,28 @@ function moveApple(index2) {
 
         let canRight = true;
         let canLeft = true;
+        let leftMultiple = 1;
+        let rightMultiple = 1;
         for (let i = 0; i < oranges.length; i++) {
             if (oranges[i].index === apples[index2].index + 7) {
-                canRight = false;
+                for (let j = 0; j < apples.length; j++) {
+                    if (oranges[j].index === apples[index2].index + 14 || apples[j].index === apples[index2].index + 14) {
+                        canRight = false;
+                    }
+                    else {
+                        rightMultiple = 2;
+                    }
+                }
             }
             if (oranges[i].index === apples[index2].index + 9) {
-                canLeft = false;
+                for (let j = 0; j < apples.length; j++) {
+                    if (oranges[j].index === apples[index2].index + 18 || apples[j].index === apples[index2].index + 18) {
+                        canLeft = false;
+                    }
+                    else {
+                        leftMultiple = 2;
+                    }
+                }
             }
         }
         for (let i = 0; i < apples.length; i++) {
@@ -228,11 +259,11 @@ function moveApple(index2) {
             }
         }
 
-        if (board[apples[index2].index + 7] !== "" && canRight) {
-            board[apples[index2].index + 7].style.backgroundImage = "url(images/red-wood-texture.jpg)";
+        if (board[apples[index2].index + (7 * rightMultiple)] !== "" && canRight) {
+            board[apples[index2].index + (7 * rightMultiple)].style.backgroundImage = "url(images/red-wood-texture.jpg)";
         }
-        if (board[apples[index2].index + 9] !== "" && canLeft) {
-            board[apples[index2].index + 9].style.backgroundImage = "url(images/red-wood-texture.jpg)";
+        if (board[apples[index2].index + (9 * leftMultiple)] !== "" && canLeft) {
+            board[apples[index2].index + (9 * leftMultiple)].style.backgroundImage = "url(images/red-wood-texture.jpg)";
         }
 
         for (let i = 0; i < board.length; i++) {
@@ -240,47 +271,47 @@ function moveApple(index2) {
         }
 
         if (canRight) {
-            board[apples[index2].index + 7].onclick = function() {
+            board[apples[index2].index + (7 * rightMultiple)].onclick = function() {
                 console.log("right");
 
-                board[apples[index2].index + 7].onclick = undefined;
-                board[apples[index2].index + 9].onclick = undefined;
+                board[apples[index2].index + (7 * rightMultiple)].onclick = undefined;
+                board[apples[index2].index + (9 * leftMultiple)].onclick = undefined;
 
-                if (board[apples[index2].index + 7] !== "") {
-                    board[apples[index2].index + 7].style.backgroundImage = "url(images/wood-texture.jpg)";
+                if (board[apples[index2].index + (7 * rightMultiple)] !== "") {
+                    board[apples[index2].index + (7 * rightMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
-                if (board[apples[index2].index + 9] !== "") {
-                    board[apples[index2].index + 9].style.backgroundImage = "url(images/wood-texture.jpg)";
+                if (board[apples[index2].index + (9 * leftMultiple)] !== "") {
+                    board[apples[index2].index + (9 * leftMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
                 apples[index2].htmlImage.style.backgroundColor = "transparent";
 
-                board[apples[index2].index + 7].append(apples[index2].htmlImage);
-                apples[index2].index += 7;
+                board[apples[index2].index + (7 * rightMultiple)].append(apples[index2].htmlImage);
+                apples[index2].index += (7 * rightMultiple);
 
-                turn = "Orange";
+                turn = (rightMultiple === 2) ? "Apple" : "Orange";
                 document.getElementById("turn").innerHTML = turn;
             }
         }
 
         if (canLeft) {
-            board[apples[index2].index + 9].onclick = function() {
+            board[apples[index2].index + (9 * leftMultiple)].onclick = function() {
                 console.log("left");
 
-                board[apples[index2].index + 7].onclick = undefined;
-                board[apples[index2].index + 9].onclick = undefined;
+                board[apples[index2].index + (7 * rightMultiple)].onclick = undefined;
+                board[apples[index2].index + (9 * leftMultiple)].onclick = undefined;
 
-                if (board[apples[index2].index + 7] !== "") {
-                    board[apples[index2].index + 7].style.backgroundImage = "url(images/wood-texture.jpg)";
+                if (board[apples[index2].index + (7 * rightMultiple)] !== "") {
+                    board[apples[index2].index + (7 * rightMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
-                if (board[apples[index2].index + 9] !== "") {
-                    board[apples[index2].index + 9].style.backgroundImage = "url(images/wood-texture.jpg)";
+                if (board[apples[index2].index + (9 * leftMultiple)] !== "") {
+                    board[apples[index2].index + (9 * leftMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
                 apples[index2].htmlImage.style.backgroundColor = "transparent";
 
-                board[apples[index2].index + 9].append(apples[index2].htmlImage);
-                apples[index2].index += 9;
+                board[apples[index2].index + (9 * leftMultiple)].append(apples[index2].htmlImage);
+                apples[index2].index += (9 * leftMultiple);
 
-                turn = "Orange";
+                turn = (leftMultiple === 2) ? "Apple" : "Orange";
                 document.getElementById("turn").innerHTML = turn;
             }
         }
