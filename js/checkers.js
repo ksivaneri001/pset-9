@@ -9,34 +9,34 @@ function createBoard() {
     oranges = [];
     apples = [];
 
-    for (let j = 0; j < 64; j++) {
+    for (let i = 0; i < 64; i++) {
         board.push(null);
     }
 
-    let k = 0;
+    let x = 0;
     let oddRow = true;
 
-    for (let l = 0; l < 64; l++) {
-        if (l !== 0 && l % 8 === 0) {
+    for (let i = 0; i < 64; i++) {
+        if (i !== 0 && i % 8 === 0) {
             oddRow = !oddRow;
-            k = (!oddRow) ? k - 1 : k + 1;
+            x = (!oddRow) ? x - 1 : x + 1;
         }
         if (oddRow) {
-            if (l % 2 !== 0) {
-                board[l] = "";
+            if (i % 2 !== 0) {
+                board[i] = "";
             }
-            else if (l % 2 === 0) {
-                board[l] = darkSquares[k];
-                k++;
+            else if (i % 2 === 0) {
+                board[i] = darkSquares[x];
+                x++;
             }
         }
         else {
-            if (l % 2 !== 0) {
-                board[l] = darkSquares[k];
+            if (i % 2 !== 0) {
+                board[i] = darkSquares[x];
             }
-            else if (l % 2 === 0) {
-                board[l] = "";
-                k++;
+            else if (i % 2 === 0) {
+                board[i] = "";
+                x++;
             }
         }
     }
@@ -91,10 +91,10 @@ function selectPiece() {
             }
         }
     }
-    for (let j = 0; j < apples.length; j++) {
-        apples[j].htmlImage.onclick = function() {
+    for (let i = 0; i < apples.length; i++) {
+        apples[i].htmlImage.onclick = function() {
             if (turn === "Apple") {
-                moveApple(j);
+                moveApple(i);
             }
         }
     }
@@ -118,19 +118,19 @@ function moveOrange(index) {
         let canRight = true;
         let canLeft = true;
         let spaceMultiple = 1;
-        for (let k = 0; k < oranges.length; k++) {
-            if (oranges[k].index === oranges[index].index - 7) {
+        for (let i = 0; i < oranges.length; i++) {
+            if (oranges[i].index === oranges[index].index - 7) {
                 canRight = false;
             }
-            if (oranges[k].index === oranges[index].index - 9) {
+            if (oranges[i].index === oranges[index].index - 9) {
                 canLeft = false;
             }
         }
-        for (let l = 0; l < apples.length; l++) {
-            if (apples[l].index === oranges[index].index - 7) {
+        for (let i = 0; i < apples.length; i++) {
+            if (apples[i].index === oranges[index].index - 7) {
                 canRight = false;
             }
-            if (apples[l].index === oranges[index].index - 9) {
+            if (apples[i].index === oranges[index].index - 9) {
                 canLeft = false;
             }
         }
@@ -142,8 +142,8 @@ function moveOrange(index) {
             board[oranges[index].index - 9].style.backgroundImage = "url(images/red-wood-texture.jpg)";
         }
 
-        for (let j = 0; j < board.length; j++) {
-            board[j].onclick = undefined;
+        for (let i = 0; i < board.length; i++) {
+            board[i].onclick = undefined;
         }
 
         if (canRight) {
@@ -211,19 +211,19 @@ function moveApple(index2) {
 
         let canRight = true;
         let canLeft = true;
-        for (let k = 0; k < oranges.length; k++) {
-            if (oranges[k].index === apples[index2].index + 7) {
+        for (let i = 0; i < oranges.length; i++) {
+            if (oranges[i].index === apples[index2].index + 7) {
                 canRight = false;
             }
-            if (oranges[k].index === apples[index2].index + 9) {
+            if (oranges[i].index === apples[index2].index + 9) {
                 canLeft = false;
             }
         }
-        for (let l = 0; l < apples.length; l++) {
-            if (apples[l].index === apples[index2].index + 7) {
+        for (let i = 0; i < apples.length; i++) {
+            if (apples[i].index === apples[index2].index + 7) {
                 canRight = false;
             }
-            if (apples[l].index === apples[index2].index + 9) {
+            if (apples[i].index === apples[index2].index + 9) {
                 canLeft = false;
             }
         }
@@ -235,8 +235,8 @@ function moveApple(index2) {
             board[apples[index2].index + 9].style.backgroundImage = "url(images/red-wood-texture.jpg)";
         }
 
-        for (let j = 0; j < board.length; j++) {
-            board[j].onclick = undefined;
+        for (let i = 0; i < board.length; i++) {
+            board[i].onclick = undefined;
         }
 
         if (canRight) {
