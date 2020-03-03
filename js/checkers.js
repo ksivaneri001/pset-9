@@ -134,9 +134,10 @@ function moveOrange(index) {
             if (board[oranges[index].index - 9] !== "") {
                 board[oranges[index].index - 9].style.backgroundImage = "url(images/wood-texture.jpg)";
             }
-
-
             oranges[index].htmlImage.style.backgroundColor = "transparent";
+
+            board[oranges[index].index - 7].append(oranges[index].htmlImage);
+            oranges[index].index -= 7;
         }
 
         board[oranges[index].index - 9].onclick = function() {
@@ -151,17 +152,74 @@ function moveOrange(index) {
             if (board[oranges[index].index - 9] !== "") {
                 board[oranges[index].index - 9].style.backgroundImage = "url(images/wood-texture.jpg)";
             }
-
             oranges[index].htmlImage.style.backgroundColor = "transparent";
+
+            board[oranges[index].index - 9].append(oranges[index].htmlImage);
+            oranges[index].index -= 9;
         }
     }
 }
 
 function moveApple (index2) {
+    for (let i = 0; i < apples.length; i++) {
+        apples[i].htmlImage.style.backgroundColor = "transparent";
+    }
+    for (let i = 0; i < darkSquares.length; i++) {
+        darkSquares[i].style.backgroundImage = "url(images/wood-texture.jpg)";
+    }
+    apples[index2].htmlImage.style.backgroundColor = "green";
+
     if (apples[index2].king) {
 
     }
     else {
+        console.log(apples[index2]);
 
+        if (board[apples[index2].index + 7] !== "") {
+            board[apples[index2].index + 7].style.backgroundImage = "url(images/red-wood-texture.jpg)";
+        }
+        if (board[apples[index2].index + 9] !== "") {
+            board[apples[index2].index + 9].style.backgroundImage = "url(images/red-wood-texture.jpg)";
+        }
+
+        for (let j = 0; j < board.length; j++) {
+            board[j].onclick = undefined;
+        }
+
+        board[apples[index2].index + 7].onclick = function() {
+            console.log("right");
+
+            board[apples[index2].index + 7].onclick = undefined;
+            board[apples[index2].index + 9].onclick = undefined;
+
+            if (board[apples[index2].index + 7] !== "") {
+                board[apples[index2].index + 7].style.backgroundImage = "url(images/wood-texture.jpg)";
+            }
+            if (board[apples[index2].index + 9] !== "") {
+                board[apples[index2].index + 9].style.backgroundImage = "url(images/wood-texture.jpg)";
+            }
+            apples[index2].htmlImage.style.backgroundColor = "transparent";
+
+            board[apples[index2].index + 7].append(apples[index2].htmlImage);
+            apples[index2].index += 7;
+        }
+
+        board[apples[index2].index + 9].onclick = function() {
+            console.log("left");
+
+            board[apples[index2].index + 7].onclick = undefined;
+            board[apples[index2].index + 9].onclick = undefined;
+
+            if (board[apples[index2].index + 7] !== "") {
+                board[apples[index2].index + 7].style.backgroundImage = "url(images/wood-texture.jpg)";
+            }
+            if (board[apples[index2].index + 9] !== "") {
+                board[apples[index2].index + 9].style.backgroundImage = "url(images/wood-texture.jpg)";
+            }
+            apples[index2].htmlImage.style.backgroundColor = "transparent";
+
+            board[apples[index2].index + 9].append(apples[index2].htmlImage);
+            apples[index2].index += 9;
+        }
     }
 }
