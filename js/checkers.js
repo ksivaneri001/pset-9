@@ -130,21 +130,33 @@ function moveOrange(index) {
         for (let i = 0; i < apples.length; i++) {
             if (apples[i].index === oranges[index].index - 7) {
                 for (let j = 0; j < apples.length; j++) {
-                    if (apples[j].index === oranges[index].index - 14 || oranges[j].index === oranges[index].index - 14) {
+                    if (apples[j].index === oranges[index].index - 14) {
                         canRight = false;
                     }
                     else {
                         rightMultiple = 2;
                     }
                 }
+                for (let k = 0; k < oranges.length; k++) {
+                    if (oranges[k].index === oranges[index].index - 14) {
+                        canRight = false;
+                        rightMultiple = 1;
+                    }
+                }
             }
             if (apples[i].index === oranges[index].index - 9) {
                 for (let j = 0; j < apples.length; j++) {
-                    if (apples[j].index === oranges[index].index - 18 || oranges[j].index === oranges[index].index - 18) {
+                    if (apples[j].index === oranges[index].index - 18) {
                         canLeft = false;
                     }
                     else {
                         leftMultiple = 2;
+                    }
+                }
+                for (let k = 0; k < oranges.length; k++) {
+                    if (oranges[k].index === oranges[index].index - 18) {
+                        canLeft = false;
+                        leftMultiple = 1;
                     }
                 }
             }
@@ -177,9 +189,19 @@ function moveOrange(index) {
                 oranges[index].htmlImage.style.backgroundColor = "transparent";
 
                 board[oranges[index].index - (7 * rightMultiple)].append(oranges[index].htmlImage);
+
+                if (rightMultiple === 2) {
+                    for (let i = 0; i < apples.length; i++) {
+                        if (apples[i].index === oranges[index].index - 7) {
+                            apples[i].htmlImage.remove();
+                            apples.splice(i, 1);
+                        }
+                    }
+                }
+
                 oranges[index].index -= (7 * rightMultiple);
 
-                turn = (rightMultiple === 2) ? "Orange" : "Apple";
+                turn = "Apple";
                 document.getElementById("turn").innerHTML = turn;
             }
         }
@@ -200,9 +222,19 @@ function moveOrange(index) {
                 oranges[index].htmlImage.style.backgroundColor = "transparent";
 
                 board[oranges[index].index - (9 * leftMultiple)].append(oranges[index].htmlImage);
+
+                if (leftMultiple === 2) {
+                    for (let i = 0; i < apples.length; i++) {
+                        if (apples[i].index === oranges[index].index - 9) {
+                            apples[i].htmlImage.remove();
+                            apples.splice(i, 1);
+                        }
+                    }
+                }
+
                 oranges[index].index -= (9 * leftMultiple);
 
-                turn = (leftMultiple === 2) ? "Orange" : "Apple";
+                turn = "Apple";
                 document.getElementById("turn").innerHTML = turn;
             }
         }
@@ -230,22 +262,34 @@ function moveApple(index2) {
         let rightMultiple = 1;
         for (let i = 0; i < oranges.length; i++) {
             if (oranges[i].index === apples[index2].index + 7) {
-                for (let j = 0; j < apples.length; j++) {
-                    if (oranges[j].index === apples[index2].index + 14 || apples[j].index === apples[index2].index + 14) {
+                for (let j = 0; j < oranges.length; j++) {
+                    if (oranges[j].index === apples[index2].index + 14) {
                         canRight = false;
                     }
                     else {
                         rightMultiple = 2;
                     }
                 }
+                for (let k = 0; k < apples.length; k++) {
+                    if (apples[k].index === apples[index2].index + 14) {
+                        canRight = false;
+                        rightMultiple = 1;
+                    }
+                }
             }
             if (oranges[i].index === apples[index2].index + 9) {
-                for (let j = 0; j < apples.length; j++) {
-                    if (oranges[j].index === apples[index2].index + 18 || apples[j].index === apples[index2].index + 18) {
+                for (let j = 0; j < oranges.length; j++) {
+                    if (oranges[j].index === apples[index2].index + 18) {
                         canLeft = false;
                     }
                     else {
                         leftMultiple = 2;
+                    }
+                }
+                for (let k = 0; k < apples.length; k++) {
+                    if (apples[k].index === apples[index2].index + 18) {
+                        canLeft = false;
+                        leftMultiple = 1;
                     }
                 }
             }
@@ -286,9 +330,19 @@ function moveApple(index2) {
                 apples[index2].htmlImage.style.backgroundColor = "transparent";
 
                 board[apples[index2].index + (7 * rightMultiple)].append(apples[index2].htmlImage);
+
+                if (rightMultiple === 2) {
+                    for (let i = 0; i < oranges.length; i++) {
+                        if (oranges[i].index === apples[index2].index + 7) {
+                            oranges[i].htmlImage.remove();
+                            oranges.splice(i, 1);
+                        }
+                    }
+                }
+
                 apples[index2].index += (7 * rightMultiple);
 
-                turn = (rightMultiple === 2) ? "Apple" : "Orange";
+                turn = "Orange";
                 document.getElementById("turn").innerHTML = turn;
             }
         }
@@ -309,9 +363,19 @@ function moveApple(index2) {
                 apples[index2].htmlImage.style.backgroundColor = "transparent";
 
                 board[apples[index2].index + (9 * leftMultiple)].append(apples[index2].htmlImage);
+
+                if (leftMultiple === 2) {
+                    for (let i = 0; i < oranges.length; i++) {
+                        if (oranges[i].index === apples[index2].index + 9) {
+                            oranges[i].htmlImage.remove();
+                            oranges.splice(i, 1);
+                        }
+                    }
+                }
+
                 apples[index2].index += (9 * leftMultiple);
 
-                turn = (leftMultiple === 2) ? "Apple" : "Orange";
+                turn = "Orange";
                 document.getElementById("turn").innerHTML = turn;
             }
         }
