@@ -201,8 +201,60 @@ function moveOrange(index) {
 
                 oranges[index].index -= (7 * rightMultiple);
 
-                turn = "Apple";
+                turn = (rightMultiple === 2) ? "Orange Again" : "Apple";
                 document.getElementById("turn").innerHTML = turn;
+
+                if (turn === "Orange Again") {
+                    let doFunctionLeft = true;
+                    let doFunctionRight = true;
+                    for (let i = 0; i < oranges.length; i++) {
+                        if (oranges[i].index === oranges[index].index - 7) {
+                            doFunctionRight = false;
+                            console.log("1");
+                        }
+                        if (oranges[i].index === oranges[index].index - 9) {
+                            doFunctionLeft = false;
+                            console.log("2");
+                        }
+                    }
+                    for (let i = 0; i < apples.length; i++) {
+                        if (apples[i].index === oranges[index].index - 7) {
+                            for (let j = 0; j < apples.length; j++) {
+                                if (apples[j].index === oranges[index].index - 14) {
+                                    doFunctionRight = false;
+                                    console.log("3");
+                                }
+                            }
+                            for (let k = 0; k < oranges.length; k++) {
+                                if (oranges[k].index === oranges[index].index - 14) {
+                                    doFunctionRight = false;
+                                    console.log("4");
+                                }
+                            }
+                        }
+                        if (apples[i].index === oranges[index].index - 9) {
+                            for (let j = 0; j < apples.length; j++) {
+                                if (apples[j].index === oranges[index].index - 18) {
+                                    doFunctionLeft = false;
+                                    console.log("5");
+                                }
+                            }
+                            for (let k = 0; k < oranges.length; k++) {
+                                if (oranges[k].index === oranges[index].index - 18) {
+                                    doFunctionLeft = false;
+                                    console.log("6");
+                                }
+                            }
+                        }
+                    }
+                    if (doFunctionRight || doFunctionLeft) {
+                        moveOrange(index);
+                    }
+                    else {
+                        turn = "Apple";
+                        document.getElementById("turn").innerHTML = turn;
+                    }
+                }
             }
         }
 
@@ -234,8 +286,60 @@ function moveOrange(index) {
 
                 oranges[index].index -= (9 * leftMultiple);
 
-                turn = "Apple";
+                turn = (leftMultiple === 2) ? "Orange Again" : "Apple";
                 document.getElementById("turn").innerHTML = turn;
+
+                if (turn === "Orange Again") {
+                    let doFunctionLeft = true;
+                    let doFunctionRight = true;
+                    for (let i = 0; i < oranges.length; i++) {
+                        if (oranges[i].index === oranges[index].index - 7) {
+                            doFunctionRight = false;
+                            console.log("1");
+                        }
+                        if (oranges[i].index === oranges[index].index - 9) {
+                            doFunctionLeft = false;
+                            console.log("2");
+                        }
+                    }
+                    for (let i = 0; i < apples.length; i++) {
+                        if (apples[i].index === oranges[index].index - 7) {
+                            for (let j = 0; j < apples.length; j++) {
+                                if (apples[j].index === oranges[index].index - 14) {
+                                    doFunctionRight = false;
+                                    console.log("3");
+                                }
+                            }
+                            for (let k = 0; k < oranges.length; k++) {
+                                if (oranges[k].index === oranges[index].index - 14) {
+                                    doFunctionRight = false;
+                                    console.log("4");
+                                }
+                            }
+                        }
+                        if (apples[i].index === oranges[index].index - 9) {
+                            for (let j = 0; j < apples.length; j++) {
+                                if (apples[j].index === oranges[index].index - 18) {
+                                    doFunctionLeft = false;
+                                    console.log("5");
+                                }
+                            }
+                            for (let k = 0; k < oranges.length; k++) {
+                                if (oranges[k].index === oranges[index].index - 18) {
+                                    doFunctionLeft = false;
+                                    console.log("6");
+                                }
+                            }
+                        }
+                    }
+                    if (doFunctionRight || doFunctionLeft) {
+                        moveOrange(index);
+                    }
+                    else {
+                        turn = "Apple";
+                        document.getElementById("turn").innerHTML = turn;
+                    }
+                }
             }
         }
     }
@@ -342,8 +446,20 @@ function moveApple(index2) {
 
                 apples[index2].index += (7 * rightMultiple);
 
-                turn = "Orange";
+                turn = (rightMultiple === 2) ? "Apple Again" : "Orange";
                 document.getElementById("turn").innerHTML = turn;
+
+                if (turn === "Apple Again") {
+                    let doFunctionLeft = true;
+                    let doFunctionRight = true;
+                    if (doFunctionRight || doFunctionLeft) {
+                        moveApple(index2);
+                    }
+                    else {
+                        turn = "Apple";
+                        document.getElementById("turn").innerHTML = turn;
+                    }
+                }
             }
         }
 
