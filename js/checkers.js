@@ -207,6 +207,14 @@ function moveOrange(index) {
                 if (turn === "Orange Again") {
                     let doFunctionLeft = true;
                     let doFunctionRight = true;
+                    if (board[oranges[index].index - 7] === "" || board[oranges[index].index - 14] === "") {
+                        console.log("ahhhhh");
+                        doFunctionRight = false;
+                    }
+                    if (board[oranges[index].index - 9] === "" || board[oranges[index].index - 18] === "") {
+                        console.log("ahhhhh2");
+                        doFunctionLeft = false;
+                    }
                     for (let i = 0; i < oranges.length; i++) {
                         if (oranges[i].index === oranges[index].index - 7) {
                             doFunctionRight = false;
@@ -292,6 +300,14 @@ function moveOrange(index) {
                 if (turn === "Orange Again") {
                     let doFunctionLeft = true;
                     let doFunctionRight = true;
+                    if (board[oranges[index].index - 7] === "" || board[oranges[index].index - 14] === "") {
+                        console.log("ahhhhh");
+                        doFunctionRight = false;
+                    }
+                    if (board[oranges[index].index - 9] === "" || board[oranges[index].index - 18] === "") {
+                        console.log("ahhhhh2");
+                        doFunctionLeft = false;
+                    }
                     for (let i = 0; i < oranges.length; i++) {
                         if (oranges[i].index === oranges[index].index - 7) {
                             doFunctionRight = false;
@@ -452,6 +468,14 @@ function moveApple(index2) {
                 if (turn === "Apple Again") {
                     let doFunctionLeft = true;
                     let doFunctionRight = true;
+                    if (board[apples[index2].index + 7] === "" || board[apples[index2].index + 14] === "") {
+                        console.log("ahhhhh");
+                        doFunctionRight = false;
+                    }
+                    if (board[apples[index2].index + 9] === "" || board[apples[index2].index + 18] === "") {
+                        console.log("ahhhhh2");
+                        doFunctionLeft = false;
+                    }
                     for (let i = 0; i < oranges.length; i++) {
                         if (oranges[i].index === apples[index2].index + 7) {
                             for (let j = 0; j < oranges.length; j++) {
@@ -531,6 +555,14 @@ function moveApple(index2) {
                 if (turn === "Apple Again") {
                     let doFunctionLeft = true;
                     let doFunctionRight = true;
+                    if (board[apples[index2].index + 7] === "" || board[apples[index2].index + 14] === "") {
+                        console.log("ahhhhh");
+                        doFunctionRight = false;
+                    }
+                    if (board[apples[index2].index + 9] === "" || board[apples[index2].index + 18] === "") {
+                        console.log("ahhhhh2");
+                        doFunctionLeft = false;
+                    }
                     for (let i = 0; i < oranges.length; i++) {
                         if (oranges[i].index === apples[index2].index + 7) {
                             for (let j = 0; j < oranges.length; j++) {
