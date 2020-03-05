@@ -452,6 +452,40 @@ function moveApple(index2) {
                 if (turn === "Apple Again") {
                     let doFunctionLeft = true;
                     let doFunctionRight = true;
+                    for (let i = 0; i < oranges.length; i++) {
+                        if (oranges[i].index === apples[index2].index + 7) {
+                            for (let j = 0; j < oranges.length; j++) {
+                                if (oranges[j].index === apples[index2].index + 14) {
+                                    doFunctionRight = false;
+                                }
+                            }
+                            for (let k = 0; k < apples.length; k++) {
+                                if (apples[k].index === apples[index2].index + 14) {
+                                    doFunctionRight = false;
+                                }
+                            }
+                        }
+                        if (oranges[i].index === apples[index2].index + 9) {
+                            for (let j = 0; j < oranges.length; j++) {
+                                if (oranges[j].index === apples[index2].index + 18) {
+                                    doFunctionLeft = false;
+                                }
+                            }
+                            for (let k = 0; k < apples.length; k++) {
+                                if (apples[k].index === apples[index2].index + 18) {
+                                    doFunctionLeft = false;
+                                }
+                            }
+                        }
+                    }
+                    for (let i = 0; i < apples.length; i++) {
+                        if (apples[i].index === apples[index2].index + 7) {
+                            doFunctionRight = false;
+                        }
+                        if (apples[i].index === apples[index2].index + 9) {
+                            doFunctionLeft = false;
+                        }
+                    }
                     if (doFunctionRight || doFunctionLeft) {
                         moveApple(index2);
                     }
@@ -491,8 +525,54 @@ function moveApple(index2) {
 
                 apples[index2].index += (9 * leftMultiple);
 
-                turn = "Orange";
+                turn = (rightMultiple === 2) ? "Apple Again" : "Orange";
                 document.getElementById("turn").innerHTML = turn;
+
+                if (turn === "Apple Again") {
+                    let doFunctionLeft = true;
+                    let doFunctionRight = true;
+                    for (let i = 0; i < oranges.length; i++) {
+                        if (oranges[i].index === apples[index2].index + 7) {
+                            for (let j = 0; j < oranges.length; j++) {
+                                if (oranges[j].index === apples[index2].index + 14) {
+                                    doFunctionRight = false;
+                                }
+                            }
+                            for (let k = 0; k < apples.length; k++) {
+                                if (apples[k].index === apples[index2].index + 14) {
+                                    doFunctionRight = false;
+                                }
+                            }
+                        }
+                        if (oranges[i].index === apples[index2].index + 9) {
+                            for (let j = 0; j < oranges.length; j++) {
+                                if (oranges[j].index === apples[index2].index + 18) {
+                                    doFunctionLeft = false;
+                                }
+                            }
+                            for (let k = 0; k < apples.length; k++) {
+                                if (apples[k].index === apples[index2].index + 18) {
+                                    doFunctionLeft = false;
+                                }
+                            }
+                        }
+                    }
+                    for (let i = 0; i < apples.length; i++) {
+                        if (apples[i].index === apples[index2].index + 7) {
+                            doFunctionRight = false;
+                        }
+                        if (apples[i].index === apples[index2].index + 9) {
+                            doFunctionLeft = false;
+                        }
+                    }
+                    if (doFunctionRight || doFunctionLeft) {
+                        moveApple(index2);
+                    }
+                    else {
+                        turn = "Apple";
+                        document.getElementById("turn").innerHTML = turn;
+                    }
+                }
             }
         }
     }
