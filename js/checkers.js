@@ -4,6 +4,8 @@ let apples;
 let darkSquares = document.getElementsByClassName("dark-square");
 let turn = "Orange";
 
+const kingAudio = document.getElementById("king-audio");
+
 function createBoard() {
     board = [];
     oranges = [];
@@ -74,6 +76,10 @@ function createBoard() {
 
             apples.push(newApplePiece);
         }
+    }
+
+    for (let i = 0; i < 18; i++) {
+        board.push("");
     }
 }
 
@@ -162,10 +168,10 @@ function moveOrange(index) {
             }
         }
 
-        if (board[oranges[index].index - (7 * rightMultiple)] !== "" && canRight) {
+        if (board[oranges[index].index - (7 * rightMultiple)] !== "" && canRight && oranges[index].index - (7 * rightMultiple) >= 0) {
             board[oranges[index].index - (7 * rightMultiple)].style.backgroundImage = "url(images/red-wood-texture.jpg)";
         }
-        if (board[oranges[index].index - (9 * leftMultiple)] !== "" && canLeft) {
+        if (board[oranges[index].index - (9 * leftMultiple)] !== "" && canLeft && oranges[index].index - (9 * leftMultiple) >= 0) {
             board[oranges[index].index - (9 * leftMultiple)].style.backgroundImage = "url(images/red-wood-texture.jpg)";
         }
 
@@ -173,17 +179,19 @@ function moveOrange(index) {
             board[i].onclick = undefined;
         }
 
-        if (canRight) {
+        if (canRight && oranges[index].index - (7 * rightMultiple) >= 0) {
             board[oranges[index].index - (7 * rightMultiple)].onclick = function() {
                 console.log("right");
 
                 board[oranges[index].index - (7 * rightMultiple)].onclick = undefined;
-                board[oranges[index].index - (9 * leftMultiple)].onclick = undefined;
+                if (oranges[index].index - (9 * leftMultiple) >= 0) {
+                    board[oranges[index].index - (9 * leftMultiple)].onclick = undefined;
+                }
 
-                if (board[oranges[index].index - (7 * rightMultiple)] !== "") {
+                if (board[oranges[index].index - (7 * rightMultiple)] !== "" && oranges[index].index - (7 * rightMultiple) >= 0) {
                     board[oranges[index].index - (7 * rightMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
-                if (board[oranges[index].index - (9 * leftMultiple)] !== "") {
+                if (board[oranges[index].index - (9 * leftMultiple)] !== "" && oranges[index].index - (9 * leftMultiple) >= 0) {
                     board[oranges[index].index - (9 * leftMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
                 oranges[index].htmlImage.style.backgroundColor = "transparent";
@@ -266,17 +274,19 @@ function moveOrange(index) {
             }
         }
 
-        if (canLeft) {
+        if (canLeft && oranges[index].index - (9 * leftMultiple) >= 0) {
             board[oranges[index].index - (9 * leftMultiple)].onclick = function() {
                 console.log("left");
 
-                board[oranges[index].index - (7 * rightMultiple)].onclick = undefined;
+                if (oranges[index].index - (7 * rightMultiple) >= 0) {
+                    board[oranges[index].index - (7 * rightMultiple)].onclick = undefined;
+                }
                 board[oranges[index].index - (9 * leftMultiple)].onclick = undefined;
 
-                if (board[oranges[index].index - (7 * rightMultiple)] !== "") {
+                if (board[oranges[index].index - (7 * rightMultiple)] !== "" && oranges[index].index - (7 * rightMultiple) >= 0) {
                     board[oranges[index].index - (7 * rightMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
-                if (board[oranges[index].index - (9 * leftMultiple)] !== "") {
+                if (board[oranges[index].index - (9 * leftMultiple)] !== "" && oranges[index].index - (9 * leftMultiple) >= 0) {
                     board[oranges[index].index - (9 * leftMultiple)].style.backgroundImage = "url(images/wood-texture.jpg)";
                 }
                 oranges[index].htmlImage.style.backgroundColor = "transparent";
@@ -514,7 +524,7 @@ function moveApple(index2) {
                         moveApple(index2);
                     }
                     else {
-                        turn = "Apple";
+                        turn = "Orange";
                         document.getElementById("turn").innerHTML = turn;
                     }
                 }
@@ -601,7 +611,7 @@ function moveApple(index2) {
                         moveApple(index2);
                     }
                     else {
-                        turn = "Apple";
+                        turn = "Orange";
                         document.getElementById("turn").innerHTML = turn;
                     }
                 }
