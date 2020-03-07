@@ -17,6 +17,10 @@ h2, div {
     text-align: center;
 }
 
+.description {
+    font-size: 24px;
+}
+
 .home-button {
     margin-left: 20px;
     margin-top: 20px;
@@ -108,4 +112,23 @@ td {
 
 .orange:hover, .apple:hover {
     cursor: pointer;
+}
+
+.games-list {
+    margin-top: 50px;
+    height: 200px;
+    text-align: center;
+    background-image: url("../images/wood-texture.jpg");
+    background-size: cover;
+}
+
+.game-cell {
+    border: 5px solid black;
+    width: 300px;
+}
+
+.game {
+    color: white;
+    text-decoration: none;
+    font-size: 32px;
 }
