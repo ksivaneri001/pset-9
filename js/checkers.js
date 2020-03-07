@@ -270,12 +270,6 @@ function moveOrange(index) {
                         }
                     }
 
-                    oranges[index].index -= (7 * rightMultiple);
-                    if (oranges[index].index <= 7) {
-                        oranges[index].king = true;
-                        oranges[index].htmlImage.src = "images/orange-king.png";
-                    }
-
                     turn = (rightMultiple === 2) ? "Orange Again" : "Apple";
                     document.getElementById("turn").innerHTML = turn;
 
@@ -392,12 +386,6 @@ function moveOrange(index) {
                                 apples.splice(i, 1);
                             }
                         }
-                    }
-
-                    oranges[index].index -= (9 * leftMultiple);
-                    if (oranges[index].index <= 7) {
-                        oranges[index].king = true;
-                        oranges[index].htmlImage.src = "images/orange-king.png";
                     }
 
                     turn = (leftMultiple === 2) ? "Orange Again" : "Apple";
@@ -813,6 +801,9 @@ function moveOrange(index) {
 
                     oranges[index].index -= (7 * rightMultiple);
                     if (oranges[index].index <= 7) {
+                        kingAudio.pause();
+                        kingAudio.currentTime = 0;
+                        kingAudio.play();
                         oranges[index].king = true;
                         oranges[index].htmlImage.src = "images/orange-king.png";
                     }
@@ -929,6 +920,9 @@ function moveOrange(index) {
 
                     oranges[index].index -= (9 * leftMultiple);
                     if (oranges[index].index <= 7) {
+                        kingAudio.pause();
+                        kingAudio.currentTime = 0;
+                        kingAudio.play();
                         oranges[index].king = true;
                         oranges[index].htmlImage.src = "images/orange-king.png";
                     }
@@ -1115,6 +1109,9 @@ function moveApple(index2) {
 
                 apples[index2].index += (7 * rightMultiple);
                 if (apples[index2].index >= 56) {
+                    kingAudio.pause();
+                    kingAudio.currentTime = 0;
+                    kingAudio.play();
                     apples[index2].king = true;
                     apples[index2].htmlImage.src = "images/apple-king.png";
                 }
@@ -1125,14 +1122,25 @@ function moveApple(index2) {
                 if (turn === "Apple Again") {
                     let doFunctionLeft = true;
                     let doFunctionRight = true;
+                    let doFunctionBackLeft = true;
+                    let doFunctionBackRight = true;
                     doFunctionRight = (board[apples[index2].index + 7] === "" || board[apples[index2].index + 14] === "") ? false : doFunctionRight;
                     doFunctionLeft = (board[apples[index2].index + 9] === "" || board[apples[index2].index + 18] === "") ? false : doFunctionLeft;
+                    doFunctionBackRight = (apples[index2].index - 14 <= 0) ? false : doFunctionBackRight;
+                    doFunctionBackLeft = (apples[index2].index - 18 <= 0) ? false : doFunctionBackLeft;
                     for (let i = 0; i < apples.length; i++) {
                         doFunctionRight = (apples[i].index === apples[index2].index + 7) ? false : doFunctionRight;
                         doFunctionLeft = (apples[i].index === apples[index2].index + 9) ? false : doFunctionLeft;
+                        doFunctionBackRight = (apples[i].index === apples[index2].index - 7) ? false : doFunctionBackRight;
+                        doFunctionBackLeft = (apples[i].index === apples[index2].index - 9) ? false : doFunctionBackLeft;
                     }
+                    let canJumpRight = false;
+                    let canJumpLeft = false;
+                    let canJumpBackRight = false;
+                    let canJumpBackLeft = false;
                     for (let i = 0; i < oranges.length; i++) {
                         if (oranges[i].index === apples[index2].index + 7) {
+                            canJumpRight = true;
                             for (let j = 0; j < oranges.length; j++) {
                                 doFunctionRight = (oranges[j].index === apples[index2].index + 14) ? false : doFunctionRight;
                             }
@@ -1141,6 +1149,7 @@ function moveApple(index2) {
                             }
                         }
                         if (oranges[i].index === apples[index2].index + 9) {
+                            canJumpLeft = true;
                             for (let j = 0; j < oranges.length; j++) {
                                 doFunctionLeft = (oranges[j].index === apples[index2].index + 18) ? false : doFunctionLeft;
                             }
@@ -1148,9 +1157,34 @@ function moveApple(index2) {
                                 doFunctionLeft = (apples[k].index === apples[index2].index + 18) ? false : doFunctionLeft;
                             }
                         }
+                        if (oranges[i].index === apples[index2].index - 7) {
+                            canJumpBackRight = true;
+                            for (let j = 0; j < oranges.length; j++) {
+                                doFunctionBackRight = (oranges[j].index === apples[index2].index - 14) ? false : doFunctionBackRight;
+                            }
+                            for (let k = 0; k < apples.length; k++) {
+                                doFunctionBackRight = (apples[k].index === apples[index2].index - 14) ? false : doFunctionBackRight;
+                            }
+                        }
+                        if (oranges[i].index === apples[index2].index - 9) {
+                            canJumpBackLeft = true;
+                            for (let j = 0; j < oranges.length; j++) {
+                                doFunctionBackLeft = (oranges[j].index === apples[index2].index - 18) ? false : doFunctionBackLeft;
+                            }
+                            for (let k = 0; k < apples.length; k++) {
+                                doFunctionBackLeft = (apples[k].index === apples[index2].index - 18) ? false : doFunctionBackLeft;
+                            }
+                        }
                     }
+                    doFunctionRight = (canJumpRight) ? doFunctionRight : false;
+                    doFunctionLeft = (canJumpLeft) ? doFunctionLeft : false;
+                    doFunctionBackRight = (canJumpBackRight) ? doFunctionBackRight : false;
+                    doFunctionBackLeft = (canJumpBackLeft) ? doFunctionBackLeft : false;
                     if (doFunctionRight || doFunctionLeft) {
-                        moveApple(index2);
+                        moveApple(index);
+                    }
+                    else if (apples[index2].king && (doFunctionBackLeft || doFunctionBackRight)) {
+                        moveApple(index);
                     }
                     else {
                         turn = "Orange";
@@ -1188,6 +1222,9 @@ function moveApple(index2) {
 
                 apples[index2].index += (9 * leftMultiple);
                 if (apples[index2].index >= 56) {
+                    kingAudio.pause();
+                    kingAudio.currentTime = 0;
+                    kingAudio.play();
                     apples[index2].king = true;
                     apples[index2].htmlImage.src = "images/apple-king.png";
                 }
@@ -1198,14 +1235,25 @@ function moveApple(index2) {
                 if (turn === "Apple Again") {
                     let doFunctionLeft = true;
                     let doFunctionRight = true;
+                    let doFunctionBackLeft = true;
+                    let doFunctionBackRight = true;
                     doFunctionRight = (board[apples[index2].index + 7] === "" || board[apples[index2].index + 14] === "") ? false : doFunctionRight;
                     doFunctionLeft = (board[apples[index2].index + 9] === "" || board[apples[index2].index + 18] === "") ? false : doFunctionLeft;
+                    doFunctionBackRight = (apples[index2].index - 14 <= 0) ? false : doFunctionBackRight;
+                    doFunctionBackLeft = (apples[index2].index - 18 <= 0) ? false : doFunctionBackLeft;
                     for (let i = 0; i < apples.length; i++) {
                         doFunctionRight = (apples[i].index === apples[index2].index + 7) ? false : doFunctionRight;
                         doFunctionLeft = (apples[i].index === apples[index2].index + 9) ? false : doFunctionLeft;
+                        doFunctionBackRight = (apples[i].index === apples[index2].index - 7) ? false : doFunctionBackRight;
+                        doFunctionBackLeft = (apples[i].index === apples[index2].index - 9) ? false : doFunctionBackLeft;
                     }
+                    let canJumpRight = false;
+                    let canJumpLeft = false;
+                    let canJumpBackRight = false;
+                    let canJumpBackLeft = false;
                     for (let i = 0; i < oranges.length; i++) {
                         if (oranges[i].index === apples[index2].index + 7) {
+                            canJumpRight = true;
                             for (let j = 0; j < oranges.length; j++) {
                                 doFunctionRight = (oranges[j].index === apples[index2].index + 14) ? false : doFunctionRight;
                             }
@@ -1214,6 +1262,7 @@ function moveApple(index2) {
                             }
                         }
                         if (oranges[i].index === apples[index2].index + 9) {
+                            canJumpLeft = true;
                             for (let j = 0; j < oranges.length; j++) {
                                 doFunctionLeft = (oranges[j].index === apples[index2].index + 18) ? false : doFunctionLeft;
                             }
@@ -1221,9 +1270,34 @@ function moveApple(index2) {
                                 doFunctionLeft = (apples[k].index === apples[index2].index + 18) ? false : doFunctionLeft;
                             }
                         }
+                        if (oranges[i].index === apples[index2].index - 7) {
+                            canJumpBackRight = true;
+                            for (let j = 0; j < oranges.length; j++) {
+                                doFunctionBackRight = (oranges[j].index === apples[index2].index - 14) ? false : doFunctionBackRight;
+                            }
+                            for (let k = 0; k < apples.length; k++) {
+                                doFunctionBackRight = (apples[k].index === apples[index2].index - 14) ? false : doFunctionBackRight;
+                            }
+                        }
+                        if (oranges[i].index === apples[index2].index - 9) {
+                            canJumpBackLeft = true;
+                            for (let j = 0; j < oranges.length; j++) {
+                                doFunctionBackLeft = (oranges[j].index === apples[index2].index - 18) ? false : doFunctionBackLeft;
+                            }
+                            for (let k = 0; k < apples.length; k++) {
+                                doFunctionBackLeft = (apples[k].index === apples[index2].index - 18) ? false : doFunctionBackLeft;
+                            }
+                        }
                     }
+                    doFunctionRight = (canJumpRight) ? doFunctionRight : false;
+                    doFunctionLeft = (canJumpLeft) ? doFunctionLeft : false;
+                    doFunctionBackRight = (canJumpBackRight) ? doFunctionBackRight : false;
+                    doFunctionBackLeft = (canJumpBackLeft) ? doFunctionBackLeft : false;
                     if (doFunctionRight || doFunctionLeft) {
-                        moveApple(index2);
+                        moveApple(index);
+                    }
+                    else if (apples[index2].king && (doFunctionBackLeft || doFunctionBackRight)) {
+                        moveApple(index);
                     }
                     else {
                         turn = "Orange";
