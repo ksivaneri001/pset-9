@@ -18,9 +18,7 @@ h2, div {
 }
 
 .home-button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 20px;
     margin-top: 20px;
     background-image: url("../images/wood-texture.jpg");
     background-size: cover;

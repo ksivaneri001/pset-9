@@ -5,6 +5,7 @@ let darkSquares = document.getElementsByClassName("dark-square");
 let turn = "Orange";
 let test = 1;
 
+const victoryAudio = document.getElementById("victory-audio");
 const kingAudio = document.getElementById("king-audio");
 
 function createBoard() {
@@ -267,6 +268,9 @@ function moveOrange(index) {
                                 apples[i].htmlImage.remove();
                                 apples.splice(i, 1);
                             }
+                            if (apples.length === 0) {
+                                win("Orange");
+                            }
                         }
                     }
 
@@ -386,6 +390,9 @@ function moveOrange(index) {
                             if (apples[i].index === oranges[index].index - 9) {
                                 apples[i].htmlImage.remove();
                                 apples.splice(i, 1);
+                            }
+                            if (apples.length === 0) {
+                                win("Orange");
                             }
                         }
                     }
@@ -507,6 +514,9 @@ function moveOrange(index) {
                             apples[i].htmlImage.remove();
                             apples.splice(i, 1);
                         }
+                        if (apples.length === 0) {
+                            win("Orange");
+                        }
                     }
                 }
 
@@ -626,6 +636,9 @@ function moveOrange(index) {
                         if (apples[i].index === oranges[index].index + 9) {
                             apples[i].htmlImage.remove();
                             apples.splice(i, 1);
+                        }
+                        if (apples.length === 0) {
+                            win("Orange");
                         }
                     }
                 }
@@ -800,6 +813,9 @@ function moveOrange(index) {
                                 apples[i].htmlImage.remove();
                                 apples.splice(i, 1);
                             }
+                            if (apples.length === 0) {
+                                win("Orange");
+                            }
                         }
                     }
 
@@ -919,6 +935,9 @@ function moveOrange(index) {
                             if (apples[i].index === oranges[index].index - 9) {
                                 apples[i].htmlImage.remove();
                                 apples.splice(i, 1);
+                            }
+                            if (apples.length === 0) {
+                                win("Orange");
                             }
                         }
                     }
@@ -1168,6 +1187,9 @@ function moveApple(index2) {
                                 oranges[i].htmlImage.remove();
                                 oranges.splice(i, 1);
                             }
+                            if (oranges.length === 0) {
+                                win("Apple");
+                            }
                         }
                     }
 
@@ -1286,6 +1308,9 @@ function moveApple(index2) {
                             if (oranges[i].index === apples[index2].index + 9) {
                                 oranges[i].htmlImage.remove();
                                 oranges.splice(i, 1);
+                            }
+                            if (oranges.length === 0) {
+                                win("Apple");
                             }
                         }
                     }
@@ -1406,6 +1431,9 @@ function moveApple(index2) {
                             oranges[i].htmlImage.remove();
                             oranges.splice(i, 1);
                         }
+                        if (oranges.length === 0) {
+                            win("Apple");
+                        }
                     }
                 }
 
@@ -1524,6 +1552,9 @@ function moveApple(index2) {
                         if (oranges[i].index === apples[index2].index - 9) {
                             oranges[i].htmlImage.remove();
                             oranges.splice(i, 1);
+                        }
+                        if (oranges.length === 0) {
+                            win("Apple");
                         }
                     }
                 }
@@ -1692,10 +1723,14 @@ function moveApple(index2) {
                             oranges[i].htmlImage.remove();
                             oranges.splice(i, 1);
                         }
+                        if (oranges.length === 0) {
+                            win("Apple");
+                        }
                     }
                 }
 
                 apples[index2].index += (7 * rightMultiple);
+
                 if (apples[index2].index >= 56) {
                     kingAudio.pause();
                     kingAudio.currentTime = 0;
@@ -1805,10 +1840,14 @@ function moveApple(index2) {
                             oranges[i].htmlImage.remove();
                             oranges.splice(i, 1);
                         }
+                        if (oranges.length === 0) {
+                            win("Apple");
+                        }
                     }
                 }
 
                 apples[index2].index += (9 * leftMultiple);
+
                 if (apples[index2].index >= 56) {
                     kingAudio.pause();
                     kingAudio.currentTime = 0;
@@ -1895,4 +1934,11 @@ function moveApple(index2) {
             }
         }
     }
+}
+
+function win(player) {
+    kingAudio.pause();
+    victoryAudio.play();
+    setTimeout(() => { window.alert(player + " wins!"); }, 100);
+    setTimeout(() => { location.reload(); }, 101);
 }
