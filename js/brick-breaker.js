@@ -239,22 +239,6 @@ function getMouse(event2) {
 function createBottles() {
     for (let y = 0; y <= 80; y += 40) {
         for (let x = 0; x < canvas.width; x += canvas.width / 10) {
-            // let hasPowerUp = (Math.random() > 0.9) ? true : false;
-            // let powerUp;
-            // if (hasPowerUp) {
-            //     let powerUpSelector = randomInteger(3);
-            //     switch(powerUpSelector) {
-            //         case 0:
-            //             powerUp = "speed down";
-            //             break;
-            //         case 1:
-            //             powerUp = "large paddle";
-            //             break;
-            //         case 2:
-            //             powerUp = "uh";
-            //             break;
-            //     }
-            // }
             let bottleTemplate = {
                 x: x,
                 y: y,
@@ -287,8 +271,4 @@ function win() {
     ctx.strokeText("You are truly the master of juice!", canvas.width / 2, (canvas.height / 2) + 40);
     ctx.fillText("You are truly the master of juice!", canvas.width / 2, (canvas.height / 2) + 40);
     document.getElementById("brick-breaker-play").innerHTML = "Play Again";
-}
-
-function randomInteger(max) {
-  return Math.floor(Math.random() * Math.floor(max));
 }
